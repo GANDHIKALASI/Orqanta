@@ -178,7 +178,7 @@
 
 ## Phase 12 — Launch Prep
 
-- [ ] Write landing page copy (separate from app)
+- [x] Write landing page copy (separate from app, interactive with live AI triage simulation)
 - [ ] Screenshot for Product Hunt / Twitter
 - [ ] Test full success criteria (see PRD §7)
 - [ ] Invite first 3 beta users
