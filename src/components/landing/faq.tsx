@@ -10,9 +10,9 @@ interface FaqItem {
 
 const faqs: FaqItem[] = [
   {
-    question: "How does the Gemini 3.8 AI triage engine work?",
+    question: "How does the Orqanta AI triage engine work?",
     answer:
-      "When a tenant submits a ticket with text descriptions and photos, Orqanta invokes Google Gemini 3.8 Flash asynchronously. It extracts severity cues, matches the exact trade category (e.g., Plumbing, Electrical, HVAC, Appliance, Roofing), and queries your organization's vetted vendor directory to recommend the best contractor with active insurance.",
+      "When a tenant submits a ticket with text descriptions and photos, Orqanta AI processes the request asynchronously. It extracts severity cues, matches the exact trade category (e.g., Plumbing, Electrical, HVAC, Appliance, Roofing), and queries your organization's vetted vendor directory to recommend the best contractor with active insurance.",
   },
   {
     question: "Can I embed the ticket submission form on my existing website?",

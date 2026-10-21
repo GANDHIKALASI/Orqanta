@@ -44,7 +44,7 @@ export function LandingHero({ isAuthenticated }: HeroProps) {
             <Sparkles className="size-3.5 text-violet-400 animate-pulse" />
             <span>AI-Native Maintenance Architecture</span>
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-            <span className="text-zinc-400 text-xs hidden sm:inline">Powered by Gemini 3.8</span>
+            <span className="text-zinc-400 text-xs hidden sm:inline">Powered by Orqanta AI</span>
           </motion.div>
 
           {/* Headline */}
@@ -76,7 +76,7 @@ export function LandingHero({ isAuthenticated }: HeroProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-8 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
+            className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
           >
             <Link
               href={isAuthenticated ? "/dashboard" : "/signup"}
@@ -116,7 +116,7 @@ export function LandingHero({ isAuthenticated }: HeroProps) {
             </div>
             <div className="flex items-center gap-2">
               <Zap className="size-4 text-amber-400" />
-              <span>&lt; 3.2s Gemini AI Triage</span>
+              <span>&lt; 3.2s Orqanta AI Triage</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="size-4 text-blue-400" />
@@ -226,7 +226,7 @@ export function LandingHero({ isAuthenticated }: HeroProps) {
                     <div className="flex items-center gap-2">
                       <Sparkles className="size-4 text-violet-400" />
                       <span className="text-xs font-semibold text-violet-200">
-                        Gemini AI Autonomous Triage
+                        Orqanta AI Autonomous Triage
                       </span>
                     </div>
                     <span className="text-[11px] font-mono font-medium text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/50">

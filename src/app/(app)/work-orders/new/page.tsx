@@ -15,7 +15,7 @@ export default async function NewWorkOrderPage() {
           Create Work Order
         </h1>
         <p className="text-sm text-zinc-500">
-          Log a new maintenance request. Google Gemini will automatically analyze and summarize the repair.
+          Log a new maintenance request. Orqanta AI will automatically analyze and summarize the repair.
         </p>
       </div>
 

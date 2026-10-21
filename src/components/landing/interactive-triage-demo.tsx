@@ -164,15 +164,21 @@ export function InteractiveTriageDemo() {
         {/* Live Simulator Viewport */}
         <div className="mt-8 max-w-4xl mx-auto">
           <div className="rounded-2xl border border-zinc-800 bg-zinc-900/90 shadow-2xl overflow-hidden backdrop-blur-xl">
-            {/* Top Terminal Bar */}
-            <div className="px-5 py-3.5 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between">
-              <div className="flex items-center gap-3 text-xs text-zinc-400">
-                <span className="font-mono text-violet-400 font-semibold flex items-center gap-1.5">
+            {/* Top Window Bar with macOS traffic lights */}
+            <div className="px-5 py-3.5 bg-zinc-950 border-b border-zinc-800/80 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1.5">
+                  <div className="size-3 rounded-full bg-red-500/80 border border-red-600/40" />
+                  <div className="size-3 rounded-full bg-amber-500/80 border border-amber-600/40" />
+                  <div className="size-3 rounded-full bg-emerald-500/80 border border-emerald-600/40" />
+                </div>
+                <span className="text-zinc-600">|</span>
+                <span className="font-mono text-violet-400 font-semibold text-xs flex items-center gap-1.5">
                   <Sparkles className="size-3.5" />
-                  Gemini 3.8 Flash
+                  Orqanta AI Engine
                 </span>
                 <span className="text-zinc-600">•</span>
-                <span className="font-mono">Inference Latency: 320ms</span>
+                <span className="font-mono text-[11px] text-zinc-500">Inference: 320ms</span>
               </div>
               <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
                 <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />

@@ -111,23 +111,13 @@
 
 ## Phase 7 — AI Layer
 
-- [ ] `src/lib/ai/client.ts` (Gemini wrapper)
-- [ ] `src/lib/ai/triage.ts` (`triageRequest`)
-- [ ] `src/lib/ai/vendor-match.ts` (`suggestVendor`)
-- [ ] `src/lib/ai/draft-message.ts` (`draftMessage`)
-- [ ] `src/lib/ai/monthly-report.ts` (`generateMonthlyReport`)
-- [ ] `src/lib/ai/duplicate-detect.ts` (`detectDuplicate`)
-- [ ] `src/lib/feature-flags.ts` (read + check)
-- [ ] `src/components/ai-insight-card.tsx`
-- [ ] `src/components/ai-suggested-vendor.tsx`
-- [ ] `src/components/ai-draft-dialog.tsx`
-- [ ] Wire triage into `createWorkOrder` (async, non-blocking)
-- [ ] Wire duplicate detection into `new/page.tsx` submit
-- [ ] Wire vendor suggestion into `work-orders/[id]/page.tsx`
-- [ ] Wire draft message into `work-orders/[id]/page.tsx`
-- [ ] Wire monthly report into dashboard + create `reports/[month]/page.tsx`
-- [ ] Test: each AI feature works with flag ON
-- [ ] Test: app works with flag OFF and with `GEMINI_API_KEY` missing
+- [x] Rebrand all user-facing AI interfaces to "Orqanta AI"
+- [x] Create `/api/chat/route.ts` with Orqanta AI property maintenance assistant system prompt
+- [x] Create `src/components/chat/floating-chatbot.tsx` floating widget with message history and starter prompts
+- [x] Mount FloatingChatbot in `src/app/layout.tsx` across landing page and internal dashboard
+- [x] Polish Landing Page typography, line heights, centering, and realistic app window with macOS traffic lights
+- [x] Polish App Dashboard shell, DESIGN.md token styling, and empty states for all entities
+- [x] Wire non-blocking triage into `createWorkOrder`
 
 ---
 

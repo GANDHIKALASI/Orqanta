@@ -17,10 +17,10 @@ const steps = [
   {
     number: "02",
     icon: Sparkles,
-    title: "Gemini 3.8 Classifies & Matches",
+    title: "Orqanta AI Classifies & Matches",
     subtitle: "Autonomous Analysis in 3s",
     description:
-      "Google Gemini analyzes text & context to pinpoint the exact trade (e.g. Plumbing vs. HVAC), assesses emergency urgency, and pairs the best insured contractor.",
+      "Orqanta AI analyzes text & context to pinpoint the exact trade (e.g. Plumbing vs. HVAC), assesses emergency urgency, and pairs the best insured contractor.",
     highlight: "99%+ Accuracy",
   },
   {

@@ -4,7 +4,7 @@ import { LandingPage } from "@/components/landing/landing-page";
 export const metadata = {
   title: "Orqanta — AI-Native Property Maintenance Platform",
   description:
-    "Autonomous maintenance operations for property managers (50–500 units). Cut dispatch time by 70% with Google Gemini AI triage and vetted vendor matching.",
+    "Autonomous maintenance operations for property managers (50–500 units). Cut dispatch time by 70% with Orqanta AI triage and vetted vendor matching.",
 };
 
 export default async function HomePage() {

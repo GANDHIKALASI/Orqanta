@@ -151,7 +151,7 @@ export function CreateWorkOrderForm({ properties }: CreateWorkOrderFormProps) {
           <div className="p-3.5 rounded-lg bg-violet-50/70 dark:bg-violet-950/20 border border-violet-200 dark:border-violet-900/40 flex items-start gap-3">
             <Sparkles className="size-4 text-violet-600 dark:text-violet-400 shrink-0 mt-0.5" />
             <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              Upon submission, <strong>Google Gemini</strong> will automatically categorize the trade, extract urgency, and recommend an eligible contractor.
+              Upon submission, <strong>Orqanta AI</strong> will automatically categorize the trade, extract urgency, and recommend an eligible contractor.
             </p>
           </div>
 

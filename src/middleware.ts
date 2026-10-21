@@ -39,8 +39,12 @@ export async function middleware(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
 
-  // SDK endpoints and health checks are public API routes
-  if (pathname.startsWith("/api/sdk") || pathname.startsWith("/api/health")) {
+  // Public API endpoints (SDK, health, and AI chat assistant)
+  if (
+    pathname.startsWith("/api/sdk") ||
+    pathname.startsWith("/api/health") ||
+    pathname.startsWith("/api/chat")
+  ) {
     return response;
   }
 

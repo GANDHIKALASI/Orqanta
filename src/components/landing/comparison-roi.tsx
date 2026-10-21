@@ -126,7 +126,7 @@ export function LandingComparisonRoi() {
             <ul className="space-y-3.5 text-sm text-zinc-300">
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="size-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span>High-resolution photo ingestion with immediate Gemini 3.8 AI analysis.</span>
+                <span>High-resolution photo ingestion with immediate Orqanta AI analysis.</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="size-4 text-emerald-400 shrink-0 mt-0.5" />

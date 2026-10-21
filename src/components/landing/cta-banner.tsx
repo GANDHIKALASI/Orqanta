@@ -39,7 +39,7 @@ export function LandingCtaBanner({ isAuthenticated }: CtaBannerProps) {
           </h2>
 
           <p className="mt-4 text-base sm:text-lg text-zinc-300 max-w-xl mx-auto font-normal">
-            Join hundreds of property managers saving 15+ hours weekly with autonomous Gemini AI triage and vetted vendor routing.
+            Join hundreds of property managers saving 15+ hours weekly with autonomous Orqanta AI triage and vetted vendor routing.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">

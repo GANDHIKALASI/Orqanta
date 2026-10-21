@@ -17,10 +17,10 @@ import {
 const features = [
   {
     icon: Cpu,
-    title: "Gemini 3.8 Flash AI Triage",
+    title: "Orqanta AI Autonomous Triage",
     badge: "Instant Diagnostics",
     description:
-      "Every work order is processed through Google Gemini in under 3 seconds. It detects 8 specialized trades, estimates urgency, and extracts tenant hazards automatically.",
+      "Every work order is processed through Orqanta AI in under 3 seconds. It detects 8 specialized trades, estimates urgency, and extracts tenant hazards automatically.",
     accent: "from-blue-500/20 to-violet-500/10",
     border: "border-blue-500/30",
     iconColor: "text-blue-400",

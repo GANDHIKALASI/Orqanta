@@ -7,6 +7,7 @@ import {
   Clock,
   ArrowRight,
   Activity,
+  Plus,
 } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -143,12 +144,21 @@ export default async function DashboardPage() {
           </div>
 
           {recentOrders.length === 0 ? (
-            <Card className="border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm text-center py-12">
-              <CardContent className="space-y-3">
-                <p className="text-sm text-zinc-500">No work orders recorded yet.</p>
-                <Link href="/work-orders/new">
-                  <Button size="sm" className="bg-zinc-900 text-white font-medium">
-                    Create New Work Order
+            <Card className="border-dashed border-2 border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm text-center py-12">
+              <CardContent className="space-y-3 max-w-sm mx-auto">
+                <div className="size-11 rounded-full bg-violet-50 dark:bg-violet-950/40 text-violet-600 dark:text-violet-400 flex items-center justify-center mx-auto">
+                  <Wrench className="size-5" />
+                </div>
+                <div className="space-y-1">
+                  <h4 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm">No maintenance requests yet</h4>
+                  <p className="text-xs text-zinc-500">
+                    Submit your first ticket to trigger autonomous Orqanta AI diagnostics and vendor matching.
+                  </p>
+                </div>
+                <Link href="/work-orders/new" className="inline-block pt-1">
+                  <Button size="sm" className="bg-zinc-900 hover:bg-zinc-800 text-white font-medium gap-1.5 shadow-sm">
+                    <Plus className="size-4" />
+                    <span>Create Work Order</span>
                   </Button>
                 </Link>
               </CardContent>
@@ -202,7 +212,7 @@ export default async function DashboardPage() {
                       <div className="space-y-0.5">
                         <p className="text-zinc-800 dark:text-zinc-200">
                           {act.action === "work_order.created" && "Work order created"}
-                          {act.action === "ai.triaged" && "Gemini AI categorized request"}
+                          {act.action === "ai.triaged" && "Orqanta AI categorized request"}
                           {act.action === "status.changed" && `Status moved to ${act.meta?.new_status}`}
                           {act.action === "vendor.assigned" && "Vendor assigned"}
                         </p>

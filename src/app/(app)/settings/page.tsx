@@ -66,7 +66,7 @@ export default async function SettingsPage() {
               AI Intelligence Capabilities
             </CardTitle>
             <CardDescription>
-              Powered by Google Gemini 3.8 Flash (Non-blocking async pipelines)
+              Powered by Orqanta AI (Non-blocking async pipelines)
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-4 space-y-3 text-sm">

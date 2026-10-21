@@ -99,7 +99,7 @@ export function LandingFooter() {
                 <ShieldCheck className="size-3.5 text-emerald-400" />
                 <span>Supabase Row-Level Security</span>
               </li>
-              <li>Google Gemini 3.8 Flash</li>
+              <li>Orqanta AI Real-Time Engine</li>
               <li>Next.js 14 App Router</li>
               <li>Resend Transactional Email</li>
             </ul>

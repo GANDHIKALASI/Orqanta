@@ -101,7 +101,7 @@ export default async function WorkOrderDetailPage({ params }: WorkOrderDetailPag
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-violet-700 dark:text-violet-400 font-semibold text-sm">
                     <Sparkles className="size-4" />
-                    <span>Gemini AI Triage Assessment</span>
+                    <span>Orqanta AI Triage Assessment</span>
                   </div>
                   {order.ai_category && (
                     <Badge variant="secondary" className="capitalize text-xs font-medium">
@@ -150,7 +150,7 @@ export default async function WorkOrderDetailPage({ params }: WorkOrderDetailPag
                       <div className="flex-1 space-y-0.5">
                         <p className="font-medium text-zinc-900 dark:text-zinc-100">
                           {act.action === "work_order.created" && "Work order submitted"}
-                          {act.action === "ai.triaged" && "AI triage completed by Gemini"}
+                          {act.action === "ai.triaged" && "AI triage completed by Orqanta AI"}
                           {act.action === "status.changed" && `Status changed to ${act.meta?.new_status}`}
                           {act.action === "vendor.assigned" && "Vendor assigned to job"}
                           {act.action === "vendor.unassigned" && "Vendor assignment removed"}
