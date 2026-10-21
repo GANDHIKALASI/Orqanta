@@ -2,8 +2,8 @@
 
 **Update this file at the end of every work session. Check the box when done.**
 
-**Current phase:** 2 — Auth + Onboarding
-**Current task:** Create src/app/(auth)/layout.tsx & auth pages
+**Current phase:** 3 — App Shell
+**Current task:** Create src/app/(app)/layout.tsx (auth-protected, sidebar + topbar)
 **Blocker:** None
 
 ---
@@ -34,15 +34,15 @@
 
 ## Phase 2 — Auth + Onboarding
 
-- [ ] Create `src/app/(auth)/layout.tsx` (centered, no sidebar)
-- [ ] Create `src/app/(auth)/login/page.tsx` (email + password)
-- [ ] Create `src/app/(auth)/signup/page.tsx` (full name, org name, email, password)
-- [ ] Create `src/app/(auth)/actions.ts`:
-  - [ ] `bootstrapOrg()` — creates org, profile, sets `app_metadata.org_id`
-  - [ ] `logout()`
-- [ ] Test: signup → org created → logged in → redirected to dashboard
-- [ ] Test: logout → redirected to `/login`
-- [ ] **Checkpoint:** Full auth loop works
+- [x] Create `src/app/(auth)/layout.tsx` (centered, no sidebar)
+- [x] Create `src/app/(auth)/login/page.tsx` (email + password)
+- [x] Create `src/app/(auth)/signup/page.tsx` (full name, org name, email, password)
+- [x] Create `src/app/(auth)/actions.ts`:
+  - [x] `bootstrapOrg()` — creates org, profile, sets `app_metadata.org_id`
+  - [x] `logout()`
+- [x] Test: signup → org created → logged in → redirected to dashboard
+- [x] Test: logout → redirected to `/login`
+- [x] **Checkpoint:** Full auth loop works
 
 ---
 
