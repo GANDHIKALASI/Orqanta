@@ -1,7 +1,16 @@
-import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { LandingPage } from "@/components/landing/landing-page";
+
+export const metadata = {
+  title: "Orqanta — AI-Native Property Maintenance Platform",
+  description:
+    "Autonomous maintenance operations for property managers (50–500 units). Cut dispatch time by 70% with Google Gemini AI triage and vetted vendor matching.",
+};
 
 export default async function HomePage() {
+  let isAuthenticated = false;
+  let userEmail: string | null = null;
+
   try {
     const supabase = createClient();
     const {
@@ -9,12 +18,13 @@ export default async function HomePage() {
     } = await supabase.auth.getUser();
 
     if (user) {
-      redirect("/dashboard");
-    } else {
-      redirect("/login");
+      isAuthenticated = true;
+      userEmail = user.email || null;
     }
   } catch {
-    // If Supabase environment is not yet configured or fails, fallback to login
-    redirect("/login");
+    // If not authenticated or error, default to unauthenticated landing view
+    isAuthenticated = false;
   }
+
+  return <LandingPage isAuthenticated={isAuthenticated} userEmail={userEmail} />;
 }
