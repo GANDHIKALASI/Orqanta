@@ -64,8 +64,9 @@ async function bootstrapOrg(params: {
     throw new Error(`Failed to create user profile: ${profileError.message}`);
   }
 
-  // 3. Update Supabase Auth app_metadata with org_id and role
+  // 3. Update Supabase Auth app_metadata with org_id and role, and auto-confirm email
   const { error: authUpdateError } = await admin.auth.admin.updateUserById(params.userId, {
+    email_confirm: true,
     app_metadata: {
       org_id: org.id,
       role: "manager",

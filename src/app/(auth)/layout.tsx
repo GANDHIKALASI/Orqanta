@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Sparkles } from "lucide-react";
+import Image from "next/image";
 
 export default function AuthLayout({
   children,
@@ -10,15 +10,19 @@ export default function AuthLayout({
   return (
     <div className="min-h-screen flex flex-col justify-between bg-zinc-50 dark:bg-zinc-950 px-4 py-8">
       {/* Top Header Logo */}
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center pt-2">
         <Link
           href="/"
-          className="inline-flex items-center gap-2.5 text-zinc-900 dark:text-zinc-50 font-semibold tracking-tight text-xl"
+          className="inline-flex items-center gap-2 transition-opacity hover:opacity-90"
         >
-          <div className="size-8 rounded-lg bg-zinc-900 dark:bg-zinc-50 text-white dark:text-zinc-900 flex items-center justify-center shadow-sm">
-            <Sparkles className="size-4 text-violet-400 dark:text-violet-600" />
-          </div>
-          <span>Orqanta</span>
+          <Image
+            src="/logo.png"
+            alt="Orqanta"
+            width={180}
+            height={50}
+            priority
+            className="h-10 w-auto object-contain rounded-md"
+          />
         </Link>
       </div>
 

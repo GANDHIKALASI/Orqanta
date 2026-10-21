@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { logoutAction } from "@/app/(auth)/actions";
@@ -31,10 +32,14 @@ export default async function DashboardPage() {
         {/* Top Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-zinc-200 dark:border-zinc-800">
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-2">
-              <div className="size-7 rounded-md bg-zinc-900 dark:bg-zinc-50 text-white dark:text-zinc-900 flex items-center justify-center">
-                <Sparkles className="size-3.5 text-violet-400 dark:text-violet-600" />
-              </div>
+            <div className="inline-flex items-center gap-3">
+              <Image
+                src="/logo-icon.png"
+                alt="Orqanta"
+                width={36}
+                height={36}
+                className="size-8 object-contain rounded-md"
+              />
               <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
                 Orqanta Workspace
               </h1>
