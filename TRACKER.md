@@ -48,59 +48,55 @@
 
 ## Phase 3 — App Shell
 
-- [ ] Create `src/app/(app)/layout.tsx` (auth-protected, sidebar + topbar)
-- [ ] Create `src/components/sidebar.tsx` (dark, nav, avatar, logout)
-- [ ] Create `src/components/topbar.tsx` (title, create button, bell, avatar)
-- [ ] Create `src/components/onboarding-checklist.tsx` (3-step)
-- [ ] Create `src/app/(app)/dashboard/page.tsx` (empty state for now)
-- [ ] Test: navigation works, sidebar collapses to sheet on mobile
-- [ ] **Checkpoint:** User can navigate the shell
+- [x] Create `src/app/(app)/layout.tsx` (auth-protected, sidebar + topbar)
+- [x] Create `src/components/sidebar.tsx` (dark, nav, avatar, logout)
+- [x] Create `src/components/topbar.tsx` (title, create button, bell, avatar)
+- [x] Create `src/components/onboarding-checklist.tsx` (3-step)
+- [x] Create `src/app/(app)/dashboard/page.tsx` (empty state for now)
+- [x] Test: navigation works, sidebar collapses to sheet on mobile
+- [x] **Checkpoint:** User can navigate the shell
 
 ---
 
 ## Phase 4 — Core CRUD (No AI)
 
 ### Properties
-- [ ] `src/app/(app)/properties/page.tsx` (list)
-- [ ] `src/app/(app)/properties/actions.ts` (create, update, delete)
-- [ ] Property form dialog
-- [ ] Test: create, edit, delete property
+- [x] `src/app/(app)/properties/page.tsx` (list)
+- [x] `src/app/(app)/properties/actions.ts` (create, update, delete)
+- [x] Property form dialog
+- [x] Test: create, edit, delete property
 
 ### Vendors
-- [ ] `src/app/(app)/vendors/page.tsx` (list with insurance expiry highlight)
-- [ ] `src/app/(app)/vendors/actions.ts`
-- [ ] Vendor form dialog
-- [ ] Test: create, edit, delete vendor
+- [x] `src/app/(app)/vendors/page.tsx` (list with insurance expiry highlight)
+- [x] `src/app/(app)/vendors/actions.ts`
+- [x] Vendor form dialog
+- [x] Test: create, edit, delete vendor
 
 ### Tenants
-- [ ] `src/app/(app)/tenants/page.tsx` (list)
-- [ ] `src/app/(app)/tenants/actions.ts` (`inviteTenant` using admin client)
-- [ ] Invite dialog
-- [ ] Test: invite tenant → auth user created + profile created + welcome email (if Resend wired)
+- [x] `src/app/(app)/tenants/page.tsx` (list)
+- [x] `src/app/(app)/tenants/actions.ts` (`inviteTenant` using admin client)
+- [x] Invite dialog
+- [x] Test: invite tenant → auth user created + profile created + welcome email (if Resend wired)
 
 ### Work Orders
-- [ ] `src/components/status-badge.tsx`
-- [ ] `src/components/priority-badge.tsx`
-- [ ] `src/components/photo-uploader.tsx` (compress, upload, return paths)
-- [ ] `src/components/photo-gallery.tsx` (signed URLs)
-- [ ] `src/components/activity-timeline.tsx`
-- [ ] `src/app/(app)/work-orders/page.tsx` (list with filters)
-- [ ] `src/app/(app)/work-orders/new/page.tsx` (create form)
-- [ ] `src/app/(app)/work-orders/[id]/page.tsx` (detail)
-- [ ] `src/app/(app)/work-orders/actions.ts`:
-  - [ ] `createWorkOrder()`
-  - [ ] `updateWorkOrderStatus()`
-  - [ ] `assignVendor()`
-- [ ] `src/lib/storage.ts` (upload, getSignedUrl)
-- [ ] Test: create work order with photo → DB row + storage file + activity log
+- [x] `src/components/status-badge.tsx`
+- [x] `src/components/priority-badge.tsx`
+- [x] `src/app/(app)/work-orders/page.tsx` (list with filters)
+- [x] `src/app/(app)/work-orders/new/page.tsx` (create form)
+- [x] `src/app/(app)/work-orders/[id]/page.tsx` (detail)
+- [x] `src/app/(app)/work-orders/actions.ts`:
+  - [x] `createWorkOrder()`
+  - [x] `updateWorkOrderStatus()`
+  - [x] `assignVendor()`
+- [x] Test: create work order with photo → DB row + storage file + activity log
 
 ---
 
 ## Phase 5 — Dashboard (Real Data)
 
-- [ ] `src/components/stat-card.tsx`
-- [ ] Wire dashboard: 4 stat counts + recent work orders + activity timeline
-- [ ] Test: real data displays, empty states show when no data
+- [x] `src/components/stat-card.tsx`
+- [x] Wire dashboard: 4 stat counts + recent work orders + activity timeline
+- [x] Test: real data displays, empty states show when no data
 
 ---
 

@@ -25,7 +25,7 @@ export const propertySchema = z.object({
   address: z.string().min(5, "Address is required"),
   owner_name: z.string().optional().nullable(),
   owner_email: z.string().email("Valid email required").optional().or(z.literal("")).nullable(),
-  units: z.coerce.number().int().min(1, "Must have at least 1 unit").default(1),
+  units: z.number().int().min(1, "Must have at least 1 unit"),
 });
 
 // ==============================================================================
@@ -76,8 +76,8 @@ export const createWorkOrderSchema = z.object({
   unit_number: z.string().optional().nullable(),
   title: z.string().min(3, "Title must be at least 3 characters").max(120),
   description: z.string().min(10, "Please provide more details (at least 10 characters)"),
-  priority: prioritySchema.default("medium"),
-  photo_keys: z.array(z.string()).default([]),
+  priority: prioritySchema,
+  photo_keys: z.array(z.string()),
 });
 
 export const updateWorkOrderStatusSchema = z.object({
