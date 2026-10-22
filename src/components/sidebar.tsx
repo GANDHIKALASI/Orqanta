@@ -86,7 +86,7 @@ export function Sidebar({ userEmail, userName, orgName }: SidebarProps) {
     : "MG";
 
   return (
-    <aside className="w-64 flex flex-col justify-between bg-zinc-950 text-zinc-200 border-r border-zinc-800/80 min-h-screen select-none shrink-0">
+    <aside className="w-64 h-screen max-h-screen flex flex-col justify-between bg-zinc-950 text-zinc-200 border-r border-zinc-800/80 overflow-y-auto select-none shrink-0 sticky top-0">
       {/* Brand & Organization */}
       <div className="flex flex-col">
         <div className="h-16 px-4 flex items-center justify-between border-b border-zinc-900">

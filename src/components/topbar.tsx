@@ -36,7 +36,7 @@ export function Topbar({ userEmail, userName, orgName, isDemoMode = false }: Top
   const { isCollapsed, toggleSidebar } = useSidebar();
 
   return (
-    <header className="h-16 px-4 md:px-8 border-b border-[#dfe8e3] bg-[#fbfcfa]/95 backdrop-blur-md flex items-center justify-between sticky top-0 z-30">
+    <header className="h-16 px-4 md:px-8 border-b border-[#dfe8e3] bg-[#fbfcfa]/95 backdrop-blur-md flex items-center justify-between sticky top-0 z-30 shrink-0">
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Mobile Sheet Trigger */}
         <div className="md:hidden">

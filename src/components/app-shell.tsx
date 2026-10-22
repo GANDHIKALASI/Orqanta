@@ -23,14 +23,14 @@ function AppShellInner({
   const { isCollapsed } = useSidebar();
 
   return (
-    <div className="min-h-screen flex bg-[#fbfcfa] font-sans antialiased text-[#0b292b]">
+    <div className="h-screen w-full flex bg-[#fbfcfa] font-sans antialiased text-[#0b292b] overflow-hidden">
       {/* Desktop Persistent / Hideable Sidebar */}
       <div
-        className={`hidden md:block transition-all duration-300 ease-in-out shrink-0 overflow-hidden ${
+        className={`hidden md:block transition-all duration-300 ease-in-out shrink-0 h-screen sticky top-0 overflow-hidden z-20 ${
           isCollapsed ? "w-0 opacity-0 pointer-events-none" : "w-64 opacity-100"
         }`}
       >
-        <div className="w-64 h-full">
+        <div className="w-64 h-screen">
           <Sidebar
             userEmail={userEmail}
             userName={userName}
@@ -40,7 +40,7 @@ function AppShellInner({
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
+      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden transition-all duration-300">
         <Topbar
           userEmail={userEmail}
           userName={userName}
