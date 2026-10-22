@@ -87,22 +87,20 @@ export function Sidebar({ userEmail, userName, orgName }: SidebarProps) {
     <aside className="w-64 flex flex-col justify-between bg-zinc-950 text-zinc-200 border-r border-zinc-800/80 min-h-screen select-none shrink-0">
       {/* Brand & Organization */}
       <div className="flex flex-col">
-        <div className="h-16 px-5 flex items-center gap-3 border-b border-zinc-900">
-          <Image
-            src="/logo-icon.png"
-            alt="Orqanta Logo"
-            width={32}
-            height={32}
-            className="size-8 object-contain rounded"
-          />
-          <div className="flex flex-col min-w-0">
-            <span className="font-semibold text-white tracking-tight text-base leading-tight">
-              Orqanta
-            </span>
-            <span className="text-[11px] text-zinc-400 font-medium truncate max-w-[150px]">
-              {orgName || "Maintenance Workspace"}
-            </span>
-          </div>
+        <div className="h-16 px-5 flex items-center justify-between border-b border-zinc-900">
+          <Link href="/dashboard" className="flex items-center gap-2 group">
+            <Image
+              src="/orqanta-logo.png"
+              alt="Orqanta"
+              width={130}
+              height={45}
+              className="h-7 w-auto object-contain filter brightness-0 invert"
+              priority
+            />
+          </Link>
+          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800/60 truncate max-w-[90px]">
+            {orgName || "Workspace"}
+          </span>
         </div>
 
         {/* Navigation Links */}
@@ -124,7 +122,7 @@ export function Sidebar({ userEmail, userName, orgName }: SidebarProps) {
                 className={cn(
                   "flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-all group",
                   isActive
-                    ? "bg-zinc-800 text-white shadow-sm"
+                    ? "bg-[#073b3a] text-white shadow-sm border border-emerald-600/30 font-semibold"
                     : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900"
                 )}
               >
@@ -133,14 +131,14 @@ export function Sidebar({ userEmail, userName, orgName }: SidebarProps) {
                     className={cn(
                       "size-4 transition-colors",
                       isActive
-                        ? "text-violet-400"
+                        ? "text-emerald-400"
                         : "text-zinc-500 group-hover:text-zinc-300"
                     )}
                   />
                   <span>{item.title}</span>
                 </div>
                 {isActive && (
-                  <ChevronRight className="size-3 text-zinc-500" />
+                  <ChevronRight className="size-3 text-emerald-400" />
                 )}
               </Link>
             );
@@ -150,10 +148,10 @@ export function Sidebar({ userEmail, userName, orgName }: SidebarProps) {
 
       {/* User Session & Sign Out */}
       <div className="p-3 border-t border-zinc-900 space-y-2">
-        <div className="p-2 rounded-lg bg-zinc-900/60 flex items-center justify-between gap-3">
+        <div className="p-2 rounded-lg bg-zinc-900/60 flex items-center justify-between gap-3 border border-zinc-800/80">
           <div className="flex items-center gap-2.5 min-w-0">
             <Avatar className="size-8 border border-zinc-700 bg-zinc-800">
-              <AvatarFallback className="text-xs font-semibold bg-violet-950 text-violet-300">
+              <AvatarFallback className="text-xs font-semibold bg-[#073b3a] text-emerald-300">
                 {initials}
               </AvatarFallback>
             </Avatar>

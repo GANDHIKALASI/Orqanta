@@ -21,92 +21,92 @@ export default async function SettingsPage() {
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+        <h1 className="text-2xl font-bold tracking-tight text-[#073b3a]">
           Workspace Settings
         </h1>
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm text-slate-500">
           Organization credentials, public SDK embed key, and feature flags.
         </p>
       </div>
 
       <div className="grid grid-cols-1 gap-6">
         {/* Organization Info */}
-        <Card className="border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm">
-          <CardHeader className="pb-3 border-b border-zinc-100 dark:border-zinc-800">
-            <CardTitle className="text-base font-semibold flex items-center gap-2">
-              <Building2 className="size-4 text-zinc-500" />
+        <div className="rounded-xl border border-[#dfe8e3] bg-white shadow-sm overflow-hidden">
+          <div className="p-4 px-5 border-b border-[#dfe8e3]/60 bg-[#fbfcfa]/60">
+            <h2 className="text-base font-semibold text-[#073b3a] flex items-center gap-2">
+              <Building2 className="size-4 text-emerald-700" />
               Organization Profile
-            </CardTitle>
-            <CardDescription>Primary account identifiers and membership</CardDescription>
-          </CardHeader>
-          <CardContent className="pt-4 space-y-3 text-sm">
-            <div className="flex justify-between py-1 border-b border-zinc-100 dark:border-zinc-800">
-              <span className="text-zinc-500">Organization Name:</span>
-              <span className="font-semibold text-zinc-900 dark:text-zinc-100">{org?.name}</span>
+            </h2>
+            <p className="text-xs text-slate-400 mt-0.5">Primary account identifiers and membership</p>
+          </div>
+          <div className="p-5 space-y-3 text-sm">
+            <div className="flex justify-between py-1.5 border-b border-[#dfe8e3]/60">
+              <span className="text-slate-500">Organization Name:</span>
+              <span className="font-semibold text-[#073b3a]">{org?.name}</span>
             </div>
-            <div className="flex justify-between py-1 border-b border-zinc-100 dark:border-zinc-800">
-              <span className="text-zinc-500">Workspace Slug:</span>
-              <span className="font-mono text-zinc-700 dark:text-zinc-300">{org?.slug}</span>
+            <div className="flex justify-between py-1.5 border-b border-[#dfe8e3]/60">
+              <span className="text-slate-500">Workspace Slug:</span>
+              <span className="font-mono text-slate-700">{org?.slug}</span>
             </div>
-            <div className="flex justify-between py-1">
-              <span className="text-zinc-500">Manager:</span>
-              <span className="font-medium text-zinc-900 dark:text-zinc-100">{profile?.full_name}</span>
+            <div className="flex justify-between py-1.5">
+              <span className="text-slate-500">Manager:</span>
+              <span className="font-medium text-[#073b3a]">{profile?.full_name}</span>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Public SDK API Key Card */}
         <ApiKeyCard apiKey={org?.api_key || ""} />
 
         {/* AI Capabilities & Feature Flags */}
-        <Card className="border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm">
-          <CardHeader className="pb-3 border-b border-zinc-100 dark:border-zinc-800">
-            <CardTitle className="text-base font-semibold flex items-center gap-2">
-              <Sparkles className="size-4 text-violet-600 dark:text-violet-400" />
+        <div className="rounded-xl border border-[#dfe8e3] bg-white shadow-sm overflow-hidden">
+          <div className="p-4 px-5 border-b border-[#dfe8e3]/60 bg-[#fbfcfa]/60">
+            <h2 className="text-base font-semibold text-[#073b3a] flex items-center gap-2">
+              <Sparkles className="size-4 text-emerald-700" />
               AI Intelligence Capabilities
-            </CardTitle>
-            <CardDescription>
+            </h2>
+            <p className="text-xs text-slate-400 mt-0.5">
               Powered by Orqanta AI (Non-blocking async pipelines)
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="pt-4 space-y-3 text-sm">
-            <div className="flex items-center justify-between py-2 border-b border-zinc-100 dark:border-zinc-800">
+            </p>
+          </div>
+          <div className="p-5 space-y-3 text-sm">
+            <div className="flex items-center justify-between py-2 border-b border-[#dfe8e3]/60">
               <div>
-                <p className="font-medium text-zinc-900 dark:text-zinc-100">Smart Ticket Triage</p>
-                <p className="text-xs text-zinc-500">
+                <p className="font-medium text-[#073b3a]">Smart Ticket Triage</p>
+                <p className="text-xs text-slate-500">
                   Auto-categorize trades, assign priority, and generate executive summaries.
                 </p>
               </div>
-              <Badge className="bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950 dark:text-emerald-400">
+              <Badge variant="outline" className="bg-[#f2f8f6] text-emerald-800 border-emerald-200">
                 Active
               </Badge>
             </div>
 
-            <div className="flex items-center justify-between py-2 border-b border-zinc-100 dark:border-zinc-800">
+            <div className="flex items-center justify-between py-2 border-b border-[#dfe8e3]/60">
               <div>
-                <p className="font-medium text-zinc-900 dark:text-zinc-100">Contractor Matching</p>
-                <p className="text-xs text-zinc-500">
+                <p className="font-medium text-[#073b3a]">Contractor Matching</p>
+                <p className="text-xs text-slate-500">
                   Analyze repair context against registered vendors, trade skills, and rates.
                 </p>
               </div>
-              <Badge className="bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950 dark:text-emerald-400">
+              <Badge variant="outline" className="bg-[#f2f8f6] text-emerald-800 border-emerald-200">
                 Active
               </Badge>
             </div>
 
             <div className="flex items-center justify-between py-2">
               <div>
-                <p className="font-medium text-zinc-900 dark:text-zinc-100">Duplicate Request Warning</p>
-                <p className="text-xs text-zinc-500">
+                <p className="font-medium text-[#073b3a]">Duplicate Request Warning</p>
+                <p className="text-xs text-slate-500">
                   Fuzzy database trigram matching + AI check for identical building complaints.
                 </p>
               </div>
-              <Badge className="bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950 dark:text-emerald-400">
+              <Badge variant="outline" className="bg-[#f2f8f6] text-emerald-800 border-emerald-200">
                 Active
               </Badge>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

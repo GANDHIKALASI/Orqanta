@@ -52,31 +52,31 @@ export function OnboardingChecklist({
   const progressPercent = Math.round((completedCount / 3) * 100);
 
   return (
-    <Card className="border border-violet-200 dark:border-violet-900/50 bg-gradient-to-r from-violet-50/70 to-white dark:from-violet-950/20 dark:to-zinc-900 shadow-sm overflow-hidden">
+    <Card className="border border-emerald-200/80 bg-gradient-to-r from-[#eef5f1]/80 to-white shadow-sm overflow-hidden">
       <CardContent className="p-5 md:p-6 space-y-4">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <div className="size-8 rounded-lg bg-violet-600 text-white flex items-center justify-center shrink-0">
-              <Sparkles className="size-4" />
+            <div className="size-8 rounded-lg bg-[#073b3a] text-white flex items-center justify-center shrink-0">
+              <Sparkles className="size-4 text-emerald-300" />
             </div>
             <div>
-              <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-base">
+              <h3 className="font-semibold text-[#073b3a] text-base">
                 Welcome to Orqanta — Workspace Setup
               </h3>
-              <p className="text-xs text-zinc-500">
-                Complete these 3 foundational steps to fully activate your AI maintenance desk.
+              <p className="text-xs text-slate-600">
+                Complete these 3 foundational steps to fully activate your maintenance desk.
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2 self-end sm:self-center">
-            <span className="text-xs font-semibold text-violet-700 dark:text-violet-400">
+            <span className="text-xs font-semibold text-emerald-800">
               {completedCount} of 3 complete
             </span>
-            <div className="w-24 h-2 rounded-full bg-violet-200 dark:bg-violet-950 overflow-hidden">
+            <div className="w-24 h-2 rounded-full bg-emerald-100 overflow-hidden">
               <div
-                className="h-full bg-violet-600 transition-all duration-500"
+                className="h-full bg-emerald-600 transition-all duration-500"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
@@ -93,32 +93,32 @@ export function OnboardingChecklist({
                 key={step.title}
                 className={`p-3.5 rounded-lg border transition-all flex flex-col justify-between gap-3 ${
                   step.done
-                    ? "bg-white/80 dark:bg-zinc-900/80 border-emerald-200 dark:border-emerald-950"
-                    : "bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 hover:border-violet-300"
+                    ? "bg-white/90 border-emerald-200"
+                    : "bg-white border-[#dfe8e3] hover:border-emerald-600/40"
                 }`}
               >
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
+                    <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
                       Step {idx + 1}
                     </span>
                     {step.done ? (
-                      <CheckCircle2 className="size-4 text-emerald-600 dark:text-emerald-400" />
+                      <CheckCircle2 className="size-4 text-emerald-600" />
                     ) : (
-                      <Circle className="size-4 text-zinc-300 dark:text-zinc-600" />
+                      <Circle className="size-4 text-slate-300" />
                     )}
                   </div>
-                  <h4 className="font-medium text-zinc-900 dark:text-zinc-100 text-sm">
+                  <h4 className="font-medium text-[#073b3a] text-sm">
                     {step.title}
                   </h4>
-                  <p className="text-xs text-zinc-500 leading-relaxed">
+                  <p className="text-xs text-slate-500 leading-relaxed">
                     {step.description}
                   </p>
                 </div>
 
                 <div>
                   {step.done ? (
-                    <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400 inline-flex items-center gap-1">
+                    <span className="text-xs font-medium text-emerald-700 inline-flex items-center gap-1">
                       Completed
                     </span>
                   ) : (
@@ -126,7 +126,7 @@ export function OnboardingChecklist({
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="p-0 h-auto text-xs font-semibold text-violet-700 dark:text-violet-400 hover:text-violet-800 inline-flex items-center gap-1"
+                        className="p-0 h-auto text-xs font-semibold text-emerald-700 hover:text-emerald-800 inline-flex items-center gap-1"
                       >
                         {step.actionText}
                         <ArrowRight className="size-3" />

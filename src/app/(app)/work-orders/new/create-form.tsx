@@ -64,7 +64,7 @@ export function CreateWorkOrderForm({ properties }: CreateWorkOrderFormProps) {
   };
 
   return (
-    <Card className="border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm">
+    <Card className="border border-[#dfe8e3] bg-white rounded-xl shadow-sm">
       <CardContent className="p-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -148,9 +148,9 @@ export function CreateWorkOrderForm({ properties }: CreateWorkOrderFormProps) {
             </Select>
           </div>
 
-          <div className="p-3.5 rounded-lg bg-violet-50/70 dark:bg-violet-950/20 border border-violet-200 dark:border-violet-900/40 flex items-start gap-3">
-            <Sparkles className="size-4 text-violet-600 dark:text-violet-400 shrink-0 mt-0.5" />
-            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+          <div className="p-3.5 rounded-lg bg-[#f2f8f6] border border-emerald-200/80 flex items-start gap-3">
+            <Sparkles className="size-4 text-emerald-700 shrink-0 mt-0.5" />
+            <p className="text-xs text-slate-600 leading-relaxed">
               Upon submission, <strong>Orqanta AI</strong> will automatically categorize the trade, extract urgency, and recommend an eligible contractor.
             </p>
           </div>
@@ -164,7 +164,7 @@ export function CreateWorkOrderForm({ properties }: CreateWorkOrderFormProps) {
             >
               Cancel
             </Button>
-            <Button type="submit" disabled={isPending} className="bg-zinc-900 hover:bg-zinc-800 text-white font-medium">
+            <Button type="submit" disabled={isPending} className="bg-[#073b3a] hover:bg-[#0b4847] text-white font-medium">
               {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

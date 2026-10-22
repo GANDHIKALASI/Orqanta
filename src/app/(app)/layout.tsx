@@ -93,7 +93,7 @@ export default async function AppLayout({
   const isDemoMode = Boolean((org?.feature_flags as Record<string, unknown>)?.demo_mode);
 
   return (
-    <div className="min-h-screen flex bg-zinc-50 dark:bg-zinc-950 font-sans antialiased text-foreground">
+    <div className="min-h-screen flex bg-[#fbfcfa] font-sans antialiased text-[#0b292b]">
       {/* Desktop Persistent Sidebar */}
       <div className="hidden md:flex">
         <Sidebar

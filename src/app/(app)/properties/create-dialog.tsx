@@ -62,14 +62,14 @@ export function CreatePropertyDialog({ triggerText = "Add Property" }: CreatePro
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" className="bg-zinc-900 hover:bg-zinc-800 text-white font-medium gap-1.5">
+        <Button size="sm" className="bg-[#073b3a] hover:bg-[#0b4847] text-white font-medium gap-1.5 shadow-sm">
           <Plus className="size-4" />
           <span>{triggerText}</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Add New Property</DialogTitle>
+          <DialogTitle className="text-[#073b3a]">Add New Property</DialogTitle>
           <DialogDescription>
             Register a building or complex to organize units and tenant tickets.
           </DialogDescription>
@@ -151,7 +151,7 @@ export function CreatePropertyDialog({ triggerText = "Add Property" }: CreatePro
             >
               Cancel
             </Button>
-            <Button type="submit" disabled={isPending} className="bg-zinc-900 text-white">
+            <Button type="submit" disabled={isPending} className="bg-[#073b3a] hover:bg-[#0b4847] text-white">
               {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

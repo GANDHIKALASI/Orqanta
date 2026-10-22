@@ -72,14 +72,14 @@ export function InviteTenantDialog({ properties, triggerText = "Invite Tenant" }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" className="bg-zinc-900 hover:bg-zinc-800 text-white font-medium gap-1.5">
+        <Button size="sm" className="bg-[#073b3a] hover:bg-[#0b4847] text-white font-medium gap-1.5 shadow-sm">
           <Plus className="size-4" />
           <span>{triggerText}</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Invite Tenant</DialogTitle>
+          <DialogTitle className="text-[#073b3a]">Invite Tenant</DialogTitle>
           <DialogDescription>
             Grant a resident access to their unit portal to submit maintenance requests.
           </DialogDescription>
@@ -170,7 +170,7 @@ export function InviteTenantDialog({ properties, triggerText = "Invite Tenant" }
             >
               Cancel
             </Button>
-            <Button type="submit" disabled={isPending} className="bg-zinc-900 text-white">
+            <Button type="submit" disabled={isPending} className="bg-[#073b3a] hover:bg-[#0b4847] text-white">
               {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

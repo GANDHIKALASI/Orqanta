@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { KeyRound, Mail, Phone, Building2, MapPin } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { KeyRound, Mail, Phone, Building2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { InviteTenantDialog } from "./invite-dialog";
 import { formatDate } from "@/lib/utils";
@@ -21,14 +20,14 @@ export default async function TenantsPage() {
   const properties = propertiesRes.data || [];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-7xl">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-2">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+          <h1 className="text-2xl font-bold tracking-tight text-[#073b3a]">
             Tenant Roster
           </h1>
-          <p className="text-sm text-zinc-500">
+          <p className="text-sm text-slate-500">
             Residents with unit-scoped access to report and track maintenance issues.
           </p>
         </div>
@@ -38,73 +37,71 @@ export default async function TenantsPage() {
 
       {/* Tenants Grid */}
       {tenants.length === 0 ? (
-        <Card className="border-dashed border-2 border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-center py-16">
-          <CardContent className="space-y-4 max-w-sm mx-auto">
-            <div className="size-12 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-500 flex items-center justify-center mx-auto">
-              <KeyRound className="size-6" />
-            </div>
-            <div className="space-y-1">
-              <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-base">
-                No tenants registered yet
-              </h3>
-              <p className="text-xs text-zinc-500">
-                Invite residents to their portal so they can submit photo-backed work orders directly.
-              </p>
-            </div>
-            <InviteTenantDialog properties={properties} triggerText="Invite Your First Tenant" />
-          </CardContent>
-        </Card>
+        <div className="rounded-xl border-2 border-dashed border-[#dfe8e3] bg-white text-center py-16 shadow-sm">
+          <div className="size-12 rounded-full bg-[#f2f8f6] text-[#073b3a] flex items-center justify-center mx-auto mb-3">
+            <KeyRound className="size-6 text-emerald-700" />
+          </div>
+          <div className="space-y-1 max-w-sm mx-auto mb-5">
+            <h3 className="font-semibold text-[#073b3a] text-base">
+              No tenants registered yet
+            </h3>
+            <p className="text-xs text-slate-500">
+              Invite residents to their portal so they can submit photo-backed work orders directly.
+            </p>
+          </div>
+          <InviteTenantDialog properties={properties} triggerText="Invite Your First Tenant" />
+        </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {tenants.map((tenant) => (
-            <Card
+            <div
               key={tenant.id}
-              className="border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex flex-col justify-between"
+              className="rounded-xl border border-[#dfe8e3] bg-white shadow-sm hover:border-emerald-600/40 hover:shadow-md transition-all flex flex-col justify-between"
             >
-              <CardHeader className="pb-3">
+              <div className="p-5 pb-3">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <CardTitle className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+                    <h3 className="text-base font-semibold text-[#073b3a]">
                       {tenant.full_name}
-                    </CardTitle>
-                    <p className="text-xs text-zinc-500 flex items-center gap-1 mt-0.5">
-                      <Building2 className="size-3 text-zinc-400" />
-                      <span>{(tenant.property as any)?.name || "Unassigned"}</span>
+                    </h3>
+                    <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
+                      <Building2 className="size-3 text-emerald-700" />
+                      <span>{(tenant.property as any)?.name || "Unassigned Building"}</span>
                     </p>
                   </div>
-                  <Badge variant="secondary" className="font-mono text-xs">
+                  <Badge variant="outline" className="font-mono text-xs bg-[#f2f8f6] text-[#073b3a] border-emerald-200/80">
                     Unit {tenant.unit_number || "—"}
                   </Badge>
                 </div>
-              </CardHeader>
+              </div>
 
-              <CardContent className="space-y-2 text-xs border-t border-zinc-100 dark:border-zinc-800 pt-3">
-                <div className="flex items-center justify-between text-zinc-600 dark:text-zinc-400">
-                  <span className="flex items-center gap-1.5">
-                    <Mail className="size-3 text-zinc-400" />
+              <div className="p-5 pt-3 space-y-2 text-xs border-t border-[#dfe8e3]/60 bg-[#fbfcfa]/60 rounded-b-xl">
+                <div className="flex items-center justify-between text-slate-600">
+                  <span className="flex items-center gap-1.5 text-slate-400">
+                    <Mail className="size-3 text-emerald-700" />
                     Email
                   </span>
-                  <span className="font-mono text-zinc-800 dark:text-zinc-200 truncate max-w-[150px]">
+                  <span className="font-mono text-[#073b3a] truncate max-w-[150px]">
                     {tenant.email}
                   </span>
                 </div>
 
                 {tenant.phone && (
-                  <div className="flex items-center justify-between text-zinc-600 dark:text-zinc-400">
-                    <span className="flex items-center gap-1.5">
-                      <Phone className="size-3 text-zinc-400" />
+                  <div className="flex items-center justify-between text-slate-600">
+                    <span className="flex items-center gap-1.5 text-slate-400">
+                      <Phone className="size-3 text-emerald-700" />
                       Phone
                     </span>
-                    <span className="text-zinc-800 dark:text-zinc-200">{tenant.phone}</span>
+                    <span className="text-[#073b3a] font-medium">{tenant.phone}</span>
                   </div>
                 )}
 
-                <div className="flex items-center justify-between text-zinc-500 text-[11px] pt-1 border-t border-zinc-100 dark:border-zinc-800/80">
+                <div className="flex items-center justify-between text-slate-400 text-[11px] pt-1 border-t border-[#dfe8e3]/60">
                   <span>Joined</span>
-                  <span>{formatDate(tenant.created_at)}</span>
+                  <span className="font-mono">{formatDate(tenant.created_at)}</span>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       )}

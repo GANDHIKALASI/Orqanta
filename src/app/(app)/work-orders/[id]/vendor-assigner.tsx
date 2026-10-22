@@ -48,10 +48,10 @@ export function VendorAssigner({
   const assignedVendor = vendors.find((v) => v.id === assignedVendorId);
 
   return (
-    <Card className="border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm">
-      <CardHeader className="pb-3 border-b border-zinc-100 dark:border-zinc-800">
-        <CardTitle className="text-sm font-semibold flex items-center gap-2">
-          <Users className="size-4 text-zinc-500" />
+    <Card className="border border-[#dfe8e3] bg-white rounded-xl shadow-sm">
+      <CardHeader className="pb-3 border-b border-[#dfe8e3]/60 bg-[#fbfcfa]/60">
+        <CardTitle className="text-sm font-semibold text-[#073b3a] flex items-center gap-2">
+          <Users className="size-4 text-emerald-700" />
           Vendor Assignment
         </CardTitle>
         <CardDescription className="text-xs">
