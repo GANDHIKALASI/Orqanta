@@ -13,22 +13,22 @@ interface LandingPricingProps {
 
 export function LandingPricing({ isAuthenticated }: LandingPricingProps) {
   return (
-    <section id="pricing" className="py-24 bg-[#fbfcfa] relative overflow-hidden">
+    <section id="pricing" className="py-14 sm:py-16 bg-[#fbfcfa] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto">
-          <p className="text-xs font-semibold uppercase tracking-[.2em] text-emerald-700 mb-3">
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="text-xs font-semibold uppercase tracking-[.2em] text-emerald-700 mb-2">
             Simple, Transparent Pricing
           </p>
-          <h2 className="text-3xl sm:text-5xl font-semibold tracking-[-.04em] text-[#073b3a]">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-[#073b3a]">
             Choose the Plan That Fits Your Properties
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-600">
+          <p className="mt-2 text-sm sm:text-base text-slate-600">
             Start with our 7-day unrestricted free trial. No credit card required. Upgrade when you are ready.
           </p>
         </div>
 
         {/* Pricing Cards Grid */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {/* Monthly Plan */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}

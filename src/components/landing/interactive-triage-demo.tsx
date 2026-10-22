@@ -112,43 +112,43 @@ export function InteractiveTriageDemo() {
   };
 
   return (
-    <section id="interactive-demo" className="py-20 bg-white border-y border-[#dfe8e3] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#eef5f1] border border-[#cbdad3] text-emerald-800 text-xs font-semibold mb-4">
+    <section id="interactive-demo" className="py-14 sm:py-16 bg-white border-y border-[#dfe8e3] relative overflow-hidden">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="text-center max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#eef5f1] border border-[#cbdad3] text-emerald-800 text-xs font-semibold mb-3">
             <Sparkles className="size-3.5 text-emerald-700" />
             <span>Interactive Simulator</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-semibold tracking-[-.04em] text-[#073b3a]">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-[#073b3a]">
             See the AI Dispatcher in Action
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-600">
+          <p className="mt-2 text-sm sm:text-base text-slate-600">
             Select a tenant maintenance scenario below to witness how Orqanta classifies trades, determines urgency, and matches vetted contractors in milliseconds.
           </p>
         </div>
 
         {/* Scenario Switcher Tabs */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
           {scenarios.map((scenario) => {
             const isSelected = scenario.id === selectedId;
             return (
               <button
                 key={scenario.id}
                 onClick={() => handleSelect(scenario.id)}
-                className={`px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2.5 border ${
+                className={`px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 border ${
                   isSelected
-                    ? "bg-[#073b3a] text-white border-[#073b3a] shadow-sm scale-[1.02]"
+                    ? "bg-[#073b3a] text-white border-[#073b3a] shadow-sm scale-[1.01]"
                     : "bg-[#fbfcfa] hover:bg-slate-100 text-slate-700 border-slate-200"
                 }`}
               >
                 {scenario.priority === "urgent" && (
-                  <Flame className="size-4 text-rose-500 animate-pulse" />
+                  <Flame className="size-3.5 text-rose-500 animate-pulse" />
                 )}
                 {scenario.priority === "high" && (
-                  <AlertTriangle className="size-4 text-amber-500" />
+                  <AlertTriangle className="size-3.5 text-amber-500" />
                 )}
                 {scenario.priority === "medium" && (
-                  <Wrench className="size-4 text-emerald-600" />
+                  <Wrench className="size-3.5 text-emerald-600" />
                 )}
                 <span>{scenario.label}</span>
               </button>
@@ -157,22 +157,22 @@ export function InteractiveTriageDemo() {
         </div>
 
         {/* Live Simulator Viewport */}
-        <div className="mt-8 max-w-4xl mx-auto">
-          <div className="rounded-xl border border-slate-200 bg-[#fbfcfa] shadow-[0_20px_60px_rgba(4,38,38,0.06)] overflow-hidden">
+        <div className="mt-6 w-full mx-auto">
+          <div className="rounded-xl border border-slate-200 bg-[#fbfcfa] shadow-[0_16px_40px_rgba(4,38,38,0.05)] overflow-hidden">
             {/* Top Window Bar with macOS traffic lights */}
-            <div className="px-5 py-3.5 bg-white border-b border-slate-200 flex items-center justify-between">
-              <div className="flex items-center gap-3">
+            <div className="px-4 py-3 bg-white border-b border-slate-200 flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
                 <div className="flex items-center gap-1.5">
-                  <div className="size-2.5 rounded-full bg-rose-400" />
-                  <div className="size-2.5 rounded-full bg-amber-400" />
-                  <div className="size-2.5 rounded-full bg-emerald-400" />
+                  <div className="size-2 rounded-full bg-rose-400" />
+                  <div className="size-2 rounded-full bg-amber-400" />
+                  <div className="size-2 rounded-full bg-emerald-400" />
                 </div>
-                <span className="text-slate-300">|</span>
+                <span className="text-slate-300 text-xs">|</span>
                 <span className="font-mono text-[#073b3a] font-semibold text-xs flex items-center gap-1.5">
-                  <Sparkles className="size-3.5 text-emerald-700" />
+                  <Sparkles className="size-3 text-emerald-700" />
                   Orqanta AI Engine
                 </span>
-                <span className="text-slate-300">•</span>
+                <span className="text-slate-300 text-xs">•</span>
                 <span className="font-mono text-[11px] text-slate-400">Inference: 320ms</span>
               </div>
               <div className="flex items-center gap-1.5 text-xs font-mono text-emerald-800 bg-[#eef5f1] px-2 py-0.5 rounded border border-[#cbdad3]">
@@ -182,7 +182,7 @@ export function InteractiveTriageDemo() {
             </div>
 
             {/* Content Body */}
-            <div className="p-6 sm:p-8 space-y-6">
+            <div className="p-4 sm:p-6 space-y-4">
               {/* Tenant Request Input */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-xs text-slate-500">

@@ -79,53 +79,53 @@ const features = [
 
 export function LandingFeatures() {
   return (
-    <section id="features" className="py-24 bg-white border-y border-[#dfe8e3] relative overflow-hidden">
+    <section id="features" className="py-14 sm:py-16 bg-white border-y border-[#dfe8e3] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto">
-          <p className="text-xs font-semibold uppercase tracking-[.2em] text-emerald-700 mb-3">
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="text-xs font-semibold uppercase tracking-[.2em] text-emerald-700 mb-2">
             Portfolio Architecture & Coordination
           </p>
-          <h2 className="text-3xl sm:text-5xl font-semibold tracking-[-.04em] text-[#073b3a]">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-[#073b3a]">
             Engineered to Run Maintenance on Autopilot
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-600">
+          <p className="mt-2 text-sm sm:text-base text-slate-600">
             Everything your operations team needs to eliminate maintenance headaches, protect property assets, and delight residents.
           </p>
         </div>
 
         {/* Feature Grid */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {features.map((feature, idx) => {
             const Icon = feature.icon;
             return (
               <motion.div
                 key={feature.title}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.4, delay: idx * 0.06 }}
-                className="p-6 sm:p-7 rounded-xl bg-[#fbfcfa] border border-slate-200/90 hover:border-emerald-600/40 hover:bg-white hover:shadow-[0_12px_32px_rgba(4,38,38,0.06)] transition-all duration-300 group flex flex-col justify-between"
+                transition={{ duration: 0.35, delay: idx * 0.05 }}
+                className="p-5 rounded-xl bg-[#fbfcfa] border border-slate-200/90 hover:border-emerald-600/40 hover:bg-white hover:shadow-[0_8px_24px_rgba(4,38,38,0.05)] transition-all duration-200 group flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="size-11 rounded-lg bg-[#eef5f1] border border-[#dfe8e3] flex items-center justify-center text-emerald-700 group-hover:scale-105 transition-transform">
-                      <Icon className="size-5 text-emerald-700" />
+                  <div className="flex items-center justify-between mb-3.5">
+                    <div className="size-9 rounded-lg bg-[#eef5f1] border border-[#dfe8e3] flex items-center justify-center text-emerald-700 group-hover:scale-105 transition-transform">
+                      <Icon className="size-4.5 text-emerald-700" />
                     </div>
-                    <span className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+                    <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
                       {feature.badge}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-semibold text-[#073b3a] group-hover:text-emerald-800 transition-colors">
+                  <h3 className="text-base font-semibold text-[#073b3a] group-hover:text-emerald-800 transition-colors">
                     {feature.title}
                   </h3>
 
-                  <p className="mt-2.5 text-sm text-slate-600 leading-relaxed">
+                  <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[#dfe8e3] flex items-center gap-2 text-xs text-slate-500 font-medium">
+                <div className="mt-4 pt-3 border-t border-[#dfe8e3] flex items-center gap-2 text-xs text-slate-500 font-medium">
                   <CheckCircle className="size-3.5 text-emerald-600" />
                   <span>Available on all active plans</span>
                 </div>
