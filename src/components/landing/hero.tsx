@@ -3,84 +3,135 @@
 import * as React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Play } from "lucide-react";
+import {
+  ArrowRight,
+  Sparkles,
+  Play,
+  ShieldCheck,
+  Zap,
+  CheckCircle2,
+  Clock,
+  Wrench,
+  Building2,
+  UserCheck,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface HeroProps {
   isAuthenticated: boolean;
 }
 
-function DashboardPreview() {
+function AutonomousDispatchConsole() {
   return (
-    <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_24px_80px_rgba(4,38,38,0.12)]">
-      <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3">
-        <div className="flex items-center gap-2">
-          <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-xs font-semibold text-slate-800">Maintenance overview</span>
-        </div>
-        <span className="text-[11px] text-slate-400 font-mono">Live operational preview</span>
-      </div>
-      <div className="grid grid-cols-3 gap-3 border-b border-slate-100 p-4">
-        <div className="rounded-lg bg-[#f2f8f6] p-3">
-          <p className="text-[10px] uppercase tracking-wider text-slate-500 font-medium">Open work orders</p>
-          <p className="mt-1 text-2xl font-bold text-[#073b3a]">24</p>
-          <span className="text-[10px] text-emerald-700 font-medium">+4 this week</span>
-        </div>
-        <div className="rounded-lg bg-slate-50 p-3">
-          <p className="text-[10px] uppercase tracking-wider text-slate-500 font-medium">In progress</p>
-          <p className="mt-1 text-2xl font-bold text-[#073b3a]">11</p>
-          <span className="text-[10px] text-slate-500">8 vendors assigned</span>
-        </div>
-        <div className="rounded-lg bg-slate-50 p-3">
-          <p className="text-[10px] uppercase tracking-wider text-slate-500 font-medium">Awaiting review</p>
-          <p className="mt-1 text-2xl font-bold text-[#073b3a]">06</p>
-          <span className="text-[10px] text-slate-500">Needs manager attention</span>
-        </div>
-      </div>
-      <div className="grid gap-4 p-4 sm:grid-cols-[1.2fr_.8fr]">
-        <div>
-          <div className="mb-3 flex items-center justify-between">
-            <p className="text-xs font-semibold text-slate-800">Recent work orders</p>
-            <span className="text-[10px] text-emerald-700 font-medium">Orqanta AI triaged</span>
+    <div className="relative">
+      {/* Decorative ambient glowing backdrop */}
+      <div className="absolute -inset-4 bg-gradient-to-tr from-emerald-500/10 via-teal-500/15 to-transparent rounded-3xl blur-2xl -z-10 pointer-events-none" />
+
+      {/* Main SaaS Browser / App Container */}
+      <div className="overflow-hidden rounded-2xl border border-[#dfe8e3] bg-white shadow-[0_24px_70px_rgba(4,38,38,0.1)]">
+        {/* Browser Top Window Chrome */}
+        <div className="flex items-center justify-between border-b border-slate-100 bg-[#f8faf9] px-4 py-3">
+          <div className="flex items-center gap-1.5">
+            <span className="size-2.5 rounded-full bg-rose-400/80" />
+            <span className="size-2.5 rounded-full bg-amber-400/80" />
+            <span className="size-2.5 rounded-full bg-emerald-400/80" />
           </div>
-          <div className="flex flex-col gap-2">
-            {[
-              ["Leaking kitchen faucet", "Oakview Apartments · Unit 204", "High", "bg-rose-50 text-rose-700 border border-rose-200/60"],
-              ["Hallway light replacement", "Maple Court · Common area", "Normal", "bg-amber-50 text-amber-700 border border-amber-200/60"],
-              ["HVAC making unusual noise", "Riverside Homes · Unit 12", "Low", "bg-emerald-50 text-emerald-700 border border-emerald-200/60"],
-            ].map(([title, sub, priority, color]) => (
-              <div key={title} className="flex items-center justify-between rounded-lg border border-slate-100 p-2.5 bg-[#fbfcfa]">
-                <div className="min-w-0">
-                  <p className="truncate text-[11px] font-semibold text-slate-800">{title}</p>
-                  <p className="mt-0.5 truncate text-[10px] text-slate-500">{sub}</p>
-                </div>
-                <span className={`ml-2 shrink-0 rounded-full px-2 py-0.5 text-[9px] font-medium ${color}`}>
-                  {priority}
+
+          <div className="flex items-center gap-2 px-3 py-1 rounded-md bg-white border border-slate-200/80 text-[11px] font-mono text-slate-500">
+            <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span>orqanta.app/operations/autonomous</span>
+          </div>
+
+          <div className="flex items-center gap-1.5 text-[10px] font-medium text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/60">
+            <Sparkles className="size-3 text-emerald-600" />
+            <span className="hidden sm:inline">AI Dispatch Core</span>
+            <span>Live</span>
+          </div>
+        </div>
+
+        {/* Console Interior */}
+        <div className="p-5 sm:p-6 space-y-4">
+          {/* Active Triage Pipeline Card */}
+          <div className="rounded-xl border border-emerald-600/20 bg-gradient-to-b from-[#f2f8f6] to-[#fbfcfa] p-4 sm:p-5 relative overflow-hidden">
+            <div className="flex items-center justify-between gap-2 mb-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-rose-600 text-white">
+                  Urgent Priority
+                </span>
+                <span className="text-xs font-semibold text-[#073b3a] flex items-center gap-1">
+                  <Building2 className="size-3.5 text-slate-500" />
+                  Grand Oak Residences · Unit 304
                 </span>
               </div>
-            ))}
-          </div>
-        </div>
-        <div className="rounded-lg bg-[#073b3a] p-4 text-white flex flex-col justify-between">
-          <div>
-            <div className="flex items-center gap-1.5 text-emerald-200">
-              <Sparkles className="size-3.5 text-emerald-300" />
-              <span className="text-[10px] font-semibold uppercase tracking-wider">Orqanta Assist</span>
+              <span className="text-[11px] font-mono text-emerald-700 font-semibold flex items-center gap-1">
+                <Clock className="size-3" /> 1.2s Triage
+              </span>
             </div>
-            <p className="mt-2.5 text-xs font-medium leading-5 text-emerald-50">
-              Three requests relate to a recurring plumbing riser issue at Oakview.
+
+            <p className="text-xs sm:text-sm font-medium text-slate-800 leading-snug">
+              &ldquo;Main water riser leaking rapidly above ceiling drywall fixture into living area.&rdquo;
             </p>
-            <p className="mt-2 text-[10px] leading-4 text-emerald-100/70">
-              Suggested priority: review with building maintenance plumbing partner.
-            </p>
+
+            {/* AI Diagnosis Breakdown */}
+            <div className="mt-3.5 pt-3 border-t border-emerald-900/10 grid grid-cols-2 sm:grid-cols-3 gap-2 text-[11px]">
+              <div className="rounded-lg bg-white/80 p-2 border border-slate-200/60">
+                <span className="text-slate-400 block text-[9px] uppercase font-bold tracking-wider">Classification</span>
+                <span className="font-semibold text-[#073b3a]">Plumbing / Water Damage</span>
+              </div>
+              <div className="rounded-lg bg-white/80 p-2 border border-slate-200/60">
+                <span className="text-slate-400 block text-[9px] uppercase font-bold tracking-wider">Confidence</span>
+                <span className="font-semibold text-emerald-700">99.8% Match</span>
+              </div>
+              <div className="rounded-lg bg-white/80 p-2 border border-slate-200/60 col-span-2 sm:col-span-1">
+                <span className="text-slate-400 block text-[9px] uppercase font-bold tracking-wider">Emergency SLA</span>
+                <span className="font-semibold text-rose-700">&lt; 45 Min Dispatch</span>
+              </div>
+            </div>
+
+            {/* Auto-Assigned Contractor Strip */}
+            <div className="mt-3 rounded-lg bg-[#073b3a] text-white p-3 flex items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="size-7 rounded-md bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0">
+                  <Wrench className="size-3.5" />
+                </div>
+                <div className="truncate">
+                  <p className="font-semibold text-white truncate">Apex Emergency Mechanicals</p>
+                  <p className="text-[10px] text-emerald-200/80">Vetted Contractor • 1.2 miles away • 4.9 ★</p>
+                </div>
+              </div>
+              <span className="shrink-0 text-[10px] font-bold px-2 py-1 rounded bg-emerald-500 text-slate-950 flex items-center gap-1">
+                <CheckCircle2 className="size-3" /> Dispatched
+              </span>
+            </div>
           </div>
-          <a
-            href="#interactive-demo"
-            className="mt-3 text-[10px] font-medium text-emerald-300 hover:text-white underline underline-offset-4 flex items-center gap-1"
-          >
-            Launch live triage simulator &rarr;
-          </a>
+
+          {/* Real-Time Platform Status Bar */}
+          <div className="grid grid-cols-3 gap-2.5 text-center">
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/70">
+              <p className="text-lg sm:text-xl font-extrabold text-[#073b3a]">3.4 min</p>
+              <p className="text-[10px] text-slate-500 font-medium">Avg. Contractor Dispatch</p>
+            </div>
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/70">
+              <p className="text-lg sm:text-xl font-extrabold text-emerald-700">100%</p>
+              <p className="text-[10px] text-slate-500 font-medium">Tenant Isolation (RLS)</p>
+            </div>
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/70">
+              <p className="text-lg sm:text-xl font-extrabold text-[#073b3a]">4.9 / 5</p>
+              <p className="text-[10px] text-slate-500 font-medium">Resident Rating</p>
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* Floating Modern Accent Badges */}
+      <div className="hidden sm:flex items-center gap-2 absolute -bottom-4 -left-4 bg-white/95 backdrop-blur-md border border-[#dfe8e3] p-2.5 px-3.5 rounded-xl shadow-lg shadow-emerald-950/5 text-xs font-semibold text-[#073b3a]">
+        <Zap className="size-4 text-emerald-600 fill-emerald-600" />
+        <span>70% Faster than manual phone dispatch</span>
+      </div>
+
+      <div className="hidden sm:flex items-center gap-2 absolute -top-4 -right-3 bg-[#073b3a] text-white p-2.5 px-3.5 rounded-xl shadow-lg text-xs font-medium border border-emerald-500/20">
+        <ShieldCheck className="size-4 text-emerald-400" />
+        <span>Multi-Tenant Enterprise RLS</span>
       </div>
     </div>
   );
@@ -124,8 +175,8 @@ export function LandingHero({ isAuthenticated }: HeroProps) {
           className="mt-8 flex flex-wrap items-center gap-3"
         >
           <Link href={isAuthenticated ? "/dashboard" : "/signup"}>
-            <Button className="h-11 rounded-md bg-[#073b3a] px-5 text-white hover:bg-[#0a504d] font-semibold text-sm gap-2 shadow-sm">
-              <span>{isAuthenticated ? "Launch Dashboard" : "Start 7-Day Free Trial"}</span>
+            <Button className="h-11 rounded-lg bg-[#073b3a] px-5 text-white hover:bg-[#0a504d] font-semibold text-sm gap-2 shadow-sm transition-all hover:-translate-y-0.5">
+              <span>{isAuthenticated ? "Go to Workspace" : "Start 7-Day Free Trial"}</span>
               <ArrowRight className="size-4" />
             </Button>
           </Link>
@@ -133,7 +184,7 @@ export function LandingHero({ isAuthenticated }: HeroProps) {
           <a href="#interactive-demo">
             <Button
               variant="outline"
-              className="h-11 rounded-md border-slate-300 bg-transparent px-5 text-[#073b3a] hover:bg-[#eef5f1] font-medium text-sm gap-2"
+              className="h-11 rounded-lg border-slate-300 bg-transparent px-5 text-[#073b3a] hover:bg-[#eef5f1] font-medium text-sm gap-2 transition-all"
             >
               <Play className="size-3.5 text-emerald-700 fill-emerald-700" />
               <span>Explore Live Triage Demo</span>
@@ -145,9 +196,10 @@ export function LandingHero({ isAuthenticated }: HeroProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-5 text-xs text-slate-500 font-medium"
+          className="mt-5 text-xs text-slate-500 font-medium flex items-center gap-2"
         >
-          Built for property managers (50–500 units) • Enterprise tenant isolation • No credit card required
+          <CheckCircle2 className="size-3.5 text-emerald-600 shrink-0" />
+          <span>Built for property managers (50–500 units) • Enterprise tenant isolation • No credit card required</span>
         </motion.p>
       </div>
 
@@ -156,7 +208,7 @@ export function LandingHero({ isAuthenticated }: HeroProps) {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.25 }}
       >
-        <DashboardPreview />
+        <AutonomousDispatchConsole />
       </motion.div>
     </section>
   );

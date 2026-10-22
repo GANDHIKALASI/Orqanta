@@ -32,12 +32,13 @@ export default async function DashboardPage() {
     activityRes,
   ] = await Promise.all([
     supabase.from("properties").select("id, name, units"),
-    supabase.from("vendors").select("id"),
-    supabase.from("profiles").select("id").eq("role", "tenant"),
+    supabase.from("vendors").select("id", { count: "exact", head: true }),
+    supabase.from("profiles").select("id", { count: "exact", head: true }).eq("role", "tenant"),
     supabase
       .from("work_orders")
       .select("*, property:properties(name)")
-      .order("created_at", { ascending: false }),
+      .order("created_at", { ascending: false })
+      .limit(30),
     supabase
       .from("activity_log")
       .select("*, actor:profiles(full_name)")
@@ -46,8 +47,8 @@ export default async function DashboardPage() {
   ]);
 
   const properties = propsRes.data || [];
-  const vendors = vendorsRes.data || [];
-  const tenants = tenantsRes.data || [];
+  const vendorCount = vendorsRes.count ?? (vendorsRes.data?.length || 0);
+  const tenantCount = tenantsRes.count ?? (tenantsRes.data?.length || 0);
   const allOrders = ordersRes.data || [];
   const activities = activityRes.data || [];
 
@@ -103,8 +104,8 @@ export default async function DashboardPage() {
       {/* 3-Step Setup Checklist (Disappears when all complete) */}
       <OnboardingChecklist
         propertyCount={properties.length}
-        vendorCount={vendors.length}
-        tenantCount={tenants.length}
+        vendorCount={vendorCount}
+        tenantCount={tenantCount}
       />
 
       {/* 4 Core Stat Cards — FULLY CLICKABLE LINKS */}
@@ -195,7 +196,7 @@ export default async function DashboardPage() {
             </span>
           </div>
           <div className="mt-1 flex items-center justify-between text-xs text-slate-500 font-medium">
-            <span>{tenants.length} registered tenant{tenants.length === 1 ? "" : "s"}</span>
+            <span>{tenantCount} registered tenant{tenantCount === 1 ? "" : "s"}</span>
             <ArrowRight className="size-3 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-[#073b3a]" />
           </div>
         </Link>

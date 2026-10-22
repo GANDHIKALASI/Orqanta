@@ -37,17 +37,17 @@ export default async function AppLayout({
     (org?.feature_flags as Record<string, unknown>)?.subscription_status ||
     "trialing") as SubscriptionStatus;
 
+  // Safe fallback: 7 days from now if not explicitly provided
+  const fallbackTrialEnd = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
   const rawTrialEnd = (org?.trial_ends_at ||
     (org?.feature_flags as Record<string, unknown>)?.trial_ends_at ||
-    (org?.created_at
-      ? new Date(new Date(org.created_at).getTime() + 7 * 24 * 60 * 60 * 1000).toISOString()
-      : new Date().toISOString())) as string;
+    fallbackTrialEnd) as string;
 
   const trialEndDate = new Date(rawTrialEnd);
   const now = new Date();
   const isTrialOver = now.getTime() > trialEndDate.getTime();
 
-  // If trial is over and status is NOT 'active', update status to 'locked'
+  // If trial is over and status is NOT 'active', mark as locked
   if (isTrialOver && subscriptionStatus !== "active") {
     if (subscriptionStatus !== "locked" && org?.id) {
       const admin = createAdminClient();
@@ -58,22 +58,14 @@ export default async function AppLayout({
         trial_ends_at: rawTrialEnd,
       };
 
-      const { error } = await admin
+      admin
         .from("organizations")
         .update({
           subscription_status: "locked",
           feature_flags: updatedFlags,
         })
-        .eq("id", org.id);
-
-      if (error) {
-        await admin
-          .from("organizations")
-          .update({
-            feature_flags: updatedFlags,
-          })
-          .eq("id", org.id);
-      }
+        .eq("id", org.id)
+        .then(() => {});
     }
     subscriptionStatus = "locked";
   }

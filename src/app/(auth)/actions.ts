@@ -201,8 +201,15 @@ export async function signupAction(rawInput: SignupInput): Promise<ActionResult>
       orgName: parsed.data.orgName,
     });
 
-    // Refresh the user session so the JWT token receives the newly injected claims
-    await supabase.auth.refreshSession();
+    // Establish or refresh the user session so auth cookies are set immediately
+    if (!authData.session) {
+      await supabase.auth.signInWithPassword({
+        email,
+        password: parsed.data.password,
+      });
+    } else {
+      await supabase.auth.refreshSession();
+    }
 
     revalidatePath("/", "layout");
     return { success: true, data: undefined };

@@ -91,10 +91,10 @@ export function LandingNavbar({ isAuthenticated }: NavbarProps) {
             <Link href="/dashboard">
               <Button
                 size="sm"
-                className="rounded-md bg-[#073b3a] px-4 text-white hover:bg-[#0a504d] text-sm font-medium gap-2 shadow-sm transition-all"
+                className="rounded-lg bg-[#073b3a] px-4 text-white hover:bg-[#0a504d] text-xs font-semibold gap-1.5 shadow-sm transition-all"
               >
-                <LayoutDashboard className="size-4" />
-                <span>Launch Dashboard</span>
+                <span>Go to Workspace</span>
+                <ArrowRight className="size-3.5" />
               </Button>
             </Link>
           ) : (
@@ -183,9 +183,9 @@ export function LandingNavbar({ isAuthenticated }: NavbarProps) {
           <div className="pt-3 border-t border-[#dfe8e3] flex flex-col gap-2">
             {isAuthenticated ? (
               <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                <Button className="w-full bg-[#073b3a] hover:bg-[#0a504d] text-white gap-2">
-                  <LayoutDashboard className="size-4" />
-                  <span>Launch Dashboard</span>
+                <Button className="w-full bg-[#073b3a] hover:bg-[#0a504d] text-white gap-2 text-xs font-semibold">
+                  <span>Go to Workspace</span>
+                  <ArrowRight className="size-3.5" />
                 </Button>
               </Link>
             ) : (

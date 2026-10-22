@@ -44,11 +44,10 @@ export default async function BillingPage() {
     (org?.feature_flags as Record<string, unknown>)?.subscription_status ||
     "trialing") as SubscriptionStatus;
 
+  const fallbackTrialEnd = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
   const rawTrialEnd = (org?.trial_ends_at ||
     (org?.feature_flags as Record<string, unknown>)?.trial_ends_at ||
-    (org?.created_at
-      ? new Date(new Date(org.created_at).getTime() + 7 * 24 * 60 * 60 * 1000).toISOString()
-      : new Date().toISOString())) as string;
+    fallbackTrialEnd) as string;
 
   const trialEndDate = new Date(rawTrialEnd);
   const now = new Date();
