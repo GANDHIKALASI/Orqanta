@@ -50,15 +50,28 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  const isAuthPage = pathname.startsWith("/login") || pathname.startsWith("/signup");
-  const isPublicPage = isAuthPage || pathname.startsWith("/portal") || pathname === "/";
+  const protectedAppRoutes = [
+    "/dashboard",
+    "/work-orders",
+    "/properties",
+    "/vendors",
+    "/tenants",
+    "/reports",
+    "/billing",
+    "/settings",
+  ];
+  const isProtectedAppRoute = protectedAppRoutes.some(
+    (route) => pathname === route || pathname.startsWith(`${route}/`)
+  );
 
-  // Redirect unauthenticated users to /login
-  if (!user && !isPublicPage) {
+  // Redirect unauthenticated users attempting to access protected app routes to /login
+  if (!user && isProtectedAppRoute) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = "/login";
     return NextResponse.redirect(redirectUrl);
   }
+
+  const isAuthPage = pathname.startsWith("/login") || pathname.startsWith("/signup");
 
   // Redirect authenticated users away from auth pages to /dashboard
   if (user && isAuthPage) {
