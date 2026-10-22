@@ -53,35 +53,10 @@ export function LandingNavbar({ isAuthenticated }: NavbarProps) {
             Product
           </a>
           <a
-            href="#interactive-demo"
-            className="hover:text-[#073b3a] transition-colors flex items-center gap-1.5"
-          >
-            <Sparkles className="size-3.5 text-emerald-700" />
-            <span>AI Triage Demo</span>
-          </a>
-          <a
-            href="#how-it-works"
-            className="hover:text-[#073b3a] transition-colors"
-          >
-            How It Works
-          </a>
-          <a
-            href="#roi"
-            className="hover:text-[#073b3a] transition-colors"
-          >
-            Impact
-          </a>
-          <a
             href="#pricing"
             className="hover:text-[#073b3a] transition-colors font-semibold text-emerald-800"
           >
             Pricing
-          </a>
-          <a
-            href="#faq"
-            className="hover:text-[#073b3a] transition-colors"
-          >
-            FAQ
           </a>
         </nav>
 
@@ -134,40 +109,11 @@ export function LandingNavbar({ isAuthenticated }: NavbarProps) {
             Product
           </a>
           <a
-            href="#interactive-demo"
-            onClick={() => setMobileMenuOpen(false)}
-            className="py-1.5 hover:text-[#073b3a] flex items-center gap-2 text-emerald-800"
-          >
-            <Sparkles className="size-4 text-emerald-700" />
-            <span>AI Triage Demo</span>
-          </a>
-          <a
-            href="#how-it-works"
-            onClick={() => setMobileMenuOpen(false)}
-            className="py-1.5 hover:text-[#073b3a]"
-          >
-            How It Works
-          </a>
-          <a
-            href="#roi"
-            onClick={() => setMobileMenuOpen(false)}
-            className="py-1.5 hover:text-[#073b3a]"
-          >
-            Impact
-          </a>
-          <a
             href="#pricing"
             onClick={() => setMobileMenuOpen(false)}
             className="py-1.5 text-emerald-800 font-semibold"
           >
             Pricing
-          </a>
-          <a
-            href="#faq"
-            onClick={() => setMobileMenuOpen(false)}
-            className="py-1.5 hover:text-[#073b3a]"
-          >
-            FAQ
           </a>
 
           {!isAuthenticated && (

@@ -4,15 +4,8 @@ import * as React from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { LandingNavbar } from "./navbar";
 import { LandingHero } from "./hero";
-import { InteractiveTriageDemo } from "./interactive-triage-demo";
 import { LandingFeatures } from "./features";
-import { LandingSolutions } from "./solutions";
-import { LandingHowItWorks } from "./how-it-works";
-import { LandingIntegrations } from "./integrations";
-import { LandingComparisonRoi } from "./comparison-roi";
 import { LandingPricing } from "./pricing";
-import { LandingFaq } from "./faq";
-import { LandingCtaBanner } from "./cta-banner";
 import { LandingFooter } from "./footer";
 
 interface LandingPageProps {
@@ -39,35 +32,14 @@ export function LandingPage({ isAuthenticated, userEmail }: LandingPageProps) {
       {/* Navigation */}
       <LandingNavbar isAuthenticated={isAuthenticated} userEmail={userEmail} />
 
-      {/* Hero Section with DashboardPreview */}
+      {/* Hero Section — Grand, full viewport height on laptop */}
       <LandingHero isAuthenticated={isAuthenticated} />
-
-      {/* Interactive Live AI Triage Simulator */}
-      <InteractiveTriageDemo />
 
       {/* Core Architectural Features */}
       <LandingFeatures />
 
-      {/* Stakeholder Solutions (Property Managers, Residents, Contractors, Owners) */}
-      <LandingSolutions />
-
-      {/* 3-Step Execution Pipeline */}
-      <LandingHowItWorks />
-
-      {/* Embedded Requests & QR Integrations */}
-      <LandingIntegrations />
-
-      {/* Operational ROI & Side-by-Side Comparison */}
-      <LandingComparisonRoi />
-
       {/* Transparent Pricing (₹199/mo & ₹1999/yr) */}
       <LandingPricing isAuthenticated={isAuthenticated} />
-
-      {/* Frequently Asked Questions */}
-      <LandingFaq />
-
-      {/* Signature Forest Green CTA Banner */}
-      <LandingCtaBanner isAuthenticated={isAuthenticated} />
 
       {/* Architectural Multi-Column Footer */}
       <LandingFooter />
