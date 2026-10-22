@@ -8,11 +8,13 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Sidebar } from "@/components/sidebar";
+import { DemoDataToggle } from "@/components/demo-data-toggle";
 
 interface TopbarProps {
   userEmail?: string;
   userName?: string;
   orgName?: string;
+  isDemoMode?: boolean;
 }
 
 const pageTitles: Record<string, string> = {
@@ -23,10 +25,11 @@ const pageTitles: Record<string, string> = {
   "/vendors": "Vendor Directory",
   "/tenants": "Tenant Roster",
   "/reports": "Monthly AI Reports",
+  "/billing": "Billing & Plans",
   "/settings": "Workspace Settings",
 };
 
-export function Topbar({ userEmail, userName, orgName }: TopbarProps) {
+export function Topbar({ userEmail, userName, orgName, isDemoMode = false }: TopbarProps) {
   const pathname = usePathname();
   const currentTitle = pageTitles[pathname] || "Orqanta Workspace";
 
@@ -66,7 +69,10 @@ export function Topbar({ userEmail, userName, orgName }: TopbarProps) {
       </div>
 
       {/* Quick Actions */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2.5 sm:gap-3">
+        {/* Mini Demo Data Toggle */}
+        <DemoDataToggle initialDemoState={isDemoMode} />
+
         <Link href="/work-orders/new">
           <Button
             size="sm"

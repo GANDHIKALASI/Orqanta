@@ -8,7 +8,7 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-zinc-50 dark:bg-zinc-950 px-4 py-8">
+    <div className="min-h-screen flex flex-col justify-between bg-[#fbfcfa] px-4 py-8">
       {/* Top Header Logo */}
       <div className="flex items-center justify-center pt-2">
         <Link
@@ -16,12 +16,12 @@ export default function AuthLayout({
           className="inline-flex items-center gap-2 transition-opacity hover:opacity-90"
         >
           <Image
-            src="/logo.png"
-            alt="Orqanta"
-            width={180}
-            height={50}
+            src="/orqanta-logo.png"
+            alt="Orqanta — Properties. People. Progress."
+            width={184}
+            height={76}
             priority
-            className="h-10 w-auto object-contain rounded-md"
+            className="h-10 w-auto object-contain"
           />
         </Link>
       </div>
@@ -32,8 +32,8 @@ export default function AuthLayout({
       </div>
 
       {/* Bottom Footer */}
-      <div className="text-center text-xs text-zinc-400 dark:text-zinc-600">
-        AI-native maintenance workspace &copy; {new Date().getFullYear()} Orqanta. All rights reserved.
+      <div className="text-center text-xs text-slate-500">
+        Properties. People. Progress. &copy; {new Date().getFullYear()} Orqanta. All rights reserved.
       </div>
     </div>
   );

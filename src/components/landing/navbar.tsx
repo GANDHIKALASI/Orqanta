@@ -12,12 +12,12 @@ interface NavbarProps {
 }
 
 export function LandingNavbar({ isAuthenticated }: NavbarProps) {
-  const [scrolled, setScrolled] = React.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
 
   React.useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 15);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -25,80 +25,76 @@ export function LandingNavbar({ isAuthenticated }: NavbarProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 z-50 transition-all duration-200 border-b ${
         scrolled
-          ? "bg-zinc-950/85 backdrop-blur-xl border-b border-zinc-800/80 shadow-2xl shadow-black/40 py-3.5"
-          : "bg-transparent py-5"
+          ? "border-[#dfe8e3] bg-[#fbfcfa]/95 backdrop-blur shadow-sm py-2.5"
+          : "border-[#dfe8e3]/80 bg-[#fbfcfa]/90 backdrop-blur py-3"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 lg:px-8">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative">
-            <Image
-              src="/logo-icon.png"
-              alt="Orqanta Emblem"
-              width={34}
-              height={34}
-              className="size-8 sm:size-9 object-contain drop-shadow-[0_0_12px_rgba(59,130,246,0.3)] transition-transform duration-300 group-hover:scale-105"
-            />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-lg sm:text-xl font-bold tracking-tight text-white flex items-center gap-1.5 font-sans">
-              Orqanta
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-violet-500/20 text-violet-300 border border-violet-500/30">
-                AI SaaS
-              </span>
-            </span>
-          </div>
+        <Link href="/" className="flex items-center gap-2 group" aria-label="Orqanta Home">
+          <Image
+            src="/orqanta-logo.png"
+            alt="Orqanta — Properties. People. Progress."
+            width={148}
+            height={62}
+            className="h-auto w-[130px] sm:w-[145px] object-contain object-left transition-opacity duration-200 group-hover:opacity-90"
+            priority
+          />
         </Link>
 
-        {/* Desktop Nav Links */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
+        {/* Desktop Navigation Links */}
+        <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
           <a
             href="#features"
-            className="hover:text-white transition-colors hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+            className="hover:text-[#073b3a] transition-colors"
           >
-            Features
+            Product
           </a>
           <a
             href="#interactive-demo"
-            className="hover:text-white transition-colors flex items-center gap-1.5 group"
+            className="hover:text-[#073b3a] transition-colors flex items-center gap-1.5"
           >
-            <Sparkles className="size-3.5 text-violet-400 group-hover:rotate-12 transition-transform" />
+            <Sparkles className="size-3.5 text-emerald-700" />
             <span>AI Triage Demo</span>
           </a>
           <a
             href="#how-it-works"
-            className="hover:text-white transition-colors hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+            className="hover:text-[#073b3a] transition-colors"
           >
-            How it Works
+            How It Works
           </a>
           <a
             href="#roi"
-            className="hover:text-white transition-colors hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+            className="hover:text-[#073b3a] transition-colors"
           >
-            ROI Comparison
+            Impact
+          </a>
+          <a
+            href="#pricing"
+            className="hover:text-[#073b3a] transition-colors font-semibold text-emerald-800"
+          >
+            Pricing
           </a>
           <a
             href="#faq"
-            className="hover:text-white transition-colors hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+            className="hover:text-[#073b3a] transition-colors"
           >
             FAQ
           </a>
         </nav>
 
-        {/* Right CTA Actions */}
-        <div className="hidden sm:flex items-center gap-3">
+        {/* Desktop Action Buttons */}
+        <div className="hidden items-center gap-3 md:flex">
           {isAuthenticated ? (
             <Link href="/dashboard">
               <Button
                 size="sm"
-                className="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 text-white font-medium shadow-lg shadow-violet-500/20 gap-2 border border-violet-400/30"
+                className="rounded-md bg-[#073b3a] px-4 text-white hover:bg-[#0a504d] text-sm font-medium gap-2 shadow-sm transition-all"
               >
                 <LayoutDashboard className="size-4" />
-                <span>Go to Dashboard</span>
-                <ArrowRight className="size-3.5" />
+                <span>Launch Dashboard</span>
               </Button>
             </Link>
           ) : (
@@ -107,16 +103,15 @@ export function LandingNavbar({ isAuthenticated }: NavbarProps) {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-zinc-300 hover:text-white hover:bg-zinc-800/60 font-medium text-xs sm:text-sm"
+                  className="text-slate-700 hover:text-[#073b3a] hover:bg-emerald-50/60 font-medium text-sm"
                 >
-                  <LogIn className="size-3.5 mr-1.5" />
-                  Sign In
+                  Log In
                 </Button>
               </Link>
               <Link href="/signup">
                 <Button
                   size="sm"
-                  className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 hover:from-blue-500 hover:via-indigo-500 hover:to-violet-500 text-white font-medium shadow-lg shadow-blue-500/25 border border-white/20 gap-1.5 transition-all duration-300 hover:scale-[1.02]"
+                  className="rounded-md bg-[#073b3a] px-4 text-white hover:bg-[#0a504d] text-sm font-medium gap-1.5 shadow-sm transition-all"
                 >
                   <span>Start Free Trial</span>
                   <ArrowRight className="size-3.5" />
@@ -126,11 +121,11 @@ export function LandingNavbar({ isAuthenticated }: NavbarProps) {
           )}
         </div>
 
-        {/* Mobile Hamburger Trigger */}
+        {/* Mobile Hamburger Toggle */}
         <div className="flex md:hidden items-center gap-2">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/80 transition-colors"
+            className="p-2 rounded-md text-slate-700 hover:text-[#073b3a] hover:bg-slate-100 transition-colors"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
@@ -138,72 +133,77 @@ export function LandingNavbar({ isAuthenticated }: NavbarProps) {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Dropdown Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden px-4 pt-4 pb-6 bg-zinc-950/95 border-b border-zinc-800/80 backdrop-blur-2xl flex flex-col gap-4 animate-in fade-in slide-in-from-top-4 duration-200">
-          <nav className="flex flex-col gap-3 text-base font-medium text-zinc-300">
-            <a
-              href="#features"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-1.5 hover:text-white"
-            >
-              Features
-            </a>
-            <a
-              href="#interactive-demo"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-1.5 hover:text-white flex items-center gap-2 text-violet-300"
-            >
-              <Sparkles className="size-4" />
-              <span>AI Triage Demo</span>
-            </a>
-            <a
-              href="#how-it-works"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-1.5 hover:text-white"
-            >
-              How it Works
-            </a>
-            <a
-              href="#roi"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-1.5 hover:text-white"
-            >
-              ROI Comparison
-            </a>
-            <a
-              href="#faq"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-1.5 hover:text-white"
-            >
-              FAQ
-            </a>
-          </nav>
+        <nav className="md:hidden flex flex-col gap-3 border-t border-[#dfe8e3] bg-[#fbfcfa] px-5 py-5 text-sm font-medium text-slate-700 animate-in fade-in slide-in-from-top-2 duration-150">
+          <a
+            href="#features"
+            onClick={() => setMobileMenuOpen(false)}
+            className="py-1.5 hover:text-[#073b3a]"
+          >
+            Product
+          </a>
+          <a
+            href="#interactive-demo"
+            onClick={() => setMobileMenuOpen(false)}
+            className="py-1.5 hover:text-[#073b3a] flex items-center gap-2 text-emerald-800"
+          >
+            <Sparkles className="size-4 text-emerald-700" />
+            <span>AI Triage Demo</span>
+          </a>
+          <a
+            href="#how-it-works"
+            onClick={() => setMobileMenuOpen(false)}
+            className="py-1.5 hover:text-[#073b3a]"
+          >
+            How It Works
+          </a>
+          <a
+            href="#roi"
+            onClick={() => setMobileMenuOpen(false)}
+            className="py-1.5 hover:text-[#073b3a]"
+          >
+            Impact
+          </a>
+          <a
+            href="#pricing"
+            onClick={() => setMobileMenuOpen(false)}
+            className="py-1.5 text-emerald-800 font-semibold"
+          >
+            Pricing
+          </a>
+          <a
+            href="#faq"
+            onClick={() => setMobileMenuOpen(false)}
+            className="py-1.5 hover:text-[#073b3a]"
+          >
+            FAQ
+          </a>
 
-          <div className="pt-3 border-t border-zinc-800/80 flex flex-col gap-2.5">
+          <div className="pt-3 border-t border-[#dfe8e3] flex flex-col gap-2">
             {isAuthenticated ? (
               <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                <Button className="w-full bg-violet-600 hover:bg-violet-500 text-white gap-2">
+                <Button className="w-full bg-[#073b3a] hover:bg-[#0a504d] text-white gap-2">
                   <LayoutDashboard className="size-4" />
-                  <span>Go to Dashboard</span>
+                  <span>Launch Dashboard</span>
                 </Button>
               </Link>
             ) : (
               <>
                 <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                  <Button variant="outline" className="w-full border-zinc-700 text-zinc-200">
-                    Sign In
+                  <Button variant="outline" className="w-full border-slate-300 text-slate-800">
+                    Log In
                   </Button>
                 </Link>
                 <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
-                  <Button className="w-full bg-gradient-to-r from-blue-600 to-violet-600 text-white">
+                  <Button className="w-full bg-[#073b3a] hover:bg-[#0a504d] text-white">
                     Start Free Trial
                   </Button>
                 </Link>
               </>
             )}
           </div>
-        </div>
+        </nav>
       )}
     </header>
   );

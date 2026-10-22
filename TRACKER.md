@@ -2,8 +2,8 @@
 
 **Update this file at the end of every work session. Check the box when done.**
 
-**Current phase:** 3 — App Shell
-**Current task:** Create src/app/(app)/layout.tsx (auth-protected, sidebar + topbar)
+**Current phase:** 8 — Trial Paywall & Billing System
+**Current task:** Completed 7-Day Trial Paywall, /billing route, mock payment flow, and Landing Page cleanup
 **Blocker:** None
 
 ---
@@ -195,6 +195,7 @@
 
 ## Notes / Blockers Log
 
-| Date | Note | Status |
-|---|---|---|
 | Day 1 | Project started | ✅ |
+| Day 2 | 7-Day Trial Paywall, /billing with ₹199/mo & ₹1999/yr, mock checkout, and business landing page cleanup | ✅ |
+| Day 3 | UI Refinement: Integrated orqanta-ui-refined styling, official logo, signature #073b3a header & footer, warm pearl canvas, and verified build (0 errors) | ✅ |
+

@@ -12,9 +12,7 @@ import {
   Loader2,
   ShieldCheck,
   User,
-  Building,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 interface Scenario {
   id: string;
@@ -110,24 +108,21 @@ export function InteractiveTriageDemo() {
     setSelectedId(id);
     setTimeout(() => {
       setIsSimulating(false);
-    }, 400);
+    }, 350);
   };
 
   return (
-    <section id="interactive-demo" className="py-24 bg-zinc-950 relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-violet-600/10 blur-[140px] pointer-events-none rounded-full" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="interactive-demo" className="py-20 bg-white border-y border-[#dfe8e3] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-950/60 border border-violet-500/30 text-violet-300 text-xs font-semibold mb-4">
-            <Sparkles className="size-3.5 text-violet-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#eef5f1] border border-[#cbdad3] text-emerald-800 text-xs font-semibold mb-4">
+            <Sparkles className="size-3.5 text-emerald-700" />
             <span>Interactive Simulator</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+          <h2 className="text-3xl sm:text-5xl font-semibold tracking-[-.04em] text-[#073b3a]">
             See the AI Dispatcher in Action
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-zinc-400">
+          <p className="mt-4 text-base sm:text-lg text-slate-600">
             Select a tenant maintenance scenario below to witness how Orqanta classifies trades, determines urgency, and matches vetted contractors in milliseconds.
           </p>
         </div>
@@ -140,20 +135,20 @@ export function InteractiveTriageDemo() {
               <button
                 key={scenario.id}
                 onClick={() => handleSelect(scenario.id)}
-                className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-2.5 border ${
+                className={`px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2.5 border ${
                   isSelected
-                    ? "bg-gradient-to-r from-blue-600 to-violet-600 text-white border-violet-400/50 shadow-lg shadow-violet-500/25 scale-[1.02]"
-                    : "bg-zinc-900/80 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 border-zinc-800"
+                    ? "bg-[#073b3a] text-white border-[#073b3a] shadow-sm scale-[1.02]"
+                    : "bg-[#fbfcfa] hover:bg-slate-100 text-slate-700 border-slate-200"
                 }`}
               >
                 {scenario.priority === "urgent" && (
-                  <Flame className="size-4 text-red-400 animate-pulse" />
+                  <Flame className="size-4 text-rose-500 animate-pulse" />
                 )}
                 {scenario.priority === "high" && (
-                  <AlertTriangle className="size-4 text-amber-400" />
+                  <AlertTriangle className="size-4 text-amber-500" />
                 )}
                 {scenario.priority === "medium" && (
-                  <Wrench className="size-4 text-blue-400" />
+                  <Wrench className="size-4 text-emerald-600" />
                 )}
                 <span>{scenario.label}</span>
               </button>
@@ -163,25 +158,25 @@ export function InteractiveTriageDemo() {
 
         {/* Live Simulator Viewport */}
         <div className="mt-8 max-w-4xl mx-auto">
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/90 shadow-2xl overflow-hidden backdrop-blur-xl">
+          <div className="rounded-xl border border-slate-200 bg-[#fbfcfa] shadow-[0_20px_60px_rgba(4,38,38,0.06)] overflow-hidden">
             {/* Top Window Bar with macOS traffic lights */}
-            <div className="px-5 py-3.5 bg-zinc-950 border-b border-zinc-800/80 flex items-center justify-between">
+            <div className="px-5 py-3.5 bg-white border-b border-slate-200 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-1.5">
-                  <div className="size-3 rounded-full bg-red-500/80 border border-red-600/40" />
-                  <div className="size-3 rounded-full bg-amber-500/80 border border-amber-600/40" />
-                  <div className="size-3 rounded-full bg-emerald-500/80 border border-emerald-600/40" />
+                  <div className="size-2.5 rounded-full bg-rose-400" />
+                  <div className="size-2.5 rounded-full bg-amber-400" />
+                  <div className="size-2.5 rounded-full bg-emerald-400" />
                 </div>
-                <span className="text-zinc-600">|</span>
-                <span className="font-mono text-violet-400 font-semibold text-xs flex items-center gap-1.5">
-                  <Sparkles className="size-3.5" />
+                <span className="text-slate-300">|</span>
+                <span className="font-mono text-[#073b3a] font-semibold text-xs flex items-center gap-1.5">
+                  <Sparkles className="size-3.5 text-emerald-700" />
                   Orqanta AI Engine
                 </span>
-                <span className="text-zinc-600">•</span>
-                <span className="font-mono text-[11px] text-zinc-500">Inference: 320ms</span>
+                <span className="text-slate-300">•</span>
+                <span className="font-mono text-[11px] text-slate-400">Inference: 320ms</span>
               </div>
-              <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
-                <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="flex items-center gap-1.5 text-xs font-mono text-emerald-800 bg-[#eef5f1] px-2 py-0.5 rounded border border-[#cbdad3]">
+                <span className="size-1.5 rounded-full bg-emerald-600 animate-pulse" />
                 <span>Zero Hallucination Guard</span>
               </div>
             </div>
@@ -190,16 +185,16 @@ export function InteractiveTriageDemo() {
             <div className="p-6 sm:p-8 space-y-6">
               {/* Tenant Request Input */}
               <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs text-zinc-400">
-                  <span className="font-semibold uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
-                    <User className="size-3.5" />
-                    Tenant Input (From App or Public SDK)
+                <div className="flex items-center justify-between text-xs text-slate-500">
+                  <span className="font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                    <User className="size-3.5 text-emerald-700" />
+                    Tenant Input (From App or Public Portal)
                   </span>
-                  <span className="text-zinc-500 font-mono">
+                  <span className="text-slate-500 font-mono text-[11px]">
                     {activeScenario.property} • {activeScenario.unit}
                   </span>
                 </div>
-                <div className="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800/80 text-zinc-200 text-sm leading-relaxed font-sans">
+                <div className="p-4 rounded-lg bg-white border border-slate-200 text-slate-800 text-sm leading-relaxed font-sans shadow-sm">
                   &ldquo;{activeScenario.issue}&rdquo;
                 </div>
               </div>
@@ -212,10 +207,10 @@ export function InteractiveTriageDemo() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="p-8 rounded-xl bg-zinc-950/50 border border-zinc-800 flex flex-col items-center justify-center gap-3"
+                    className="p-8 rounded-lg bg-white border border-slate-200 flex flex-col items-center justify-center gap-3"
                   >
-                    <Loader2 className="size-6 text-violet-400 animate-spin" />
-                    <span className="text-xs font-mono text-zinc-400">
+                    <Loader2 className="size-6 text-emerald-700 animate-spin" />
+                    <span className="text-xs font-mono text-slate-500">
                       Analyzing symptom patterns & trade taxonomy...
                     </span>
                   </motion.div>
@@ -229,81 +224,81 @@ export function InteractiveTriageDemo() {
                   >
                     {/* Triage Output Badges */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      <div className="p-3.5 rounded-xl bg-zinc-950/90 border border-zinc-800">
-                        <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider block">
+                      <div className="p-3.5 rounded-lg bg-white border border-slate-200 shadow-sm">
+                        <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
                           Classified Trade
                         </span>
                         <div className="mt-1 flex items-center justify-between">
-                          <span className="text-base font-bold text-white">
+                          <span className="text-base font-bold text-[#073b3a]">
                             {activeScenario.detectedTrade}
                           </span>
-                          <span className="text-xs font-mono text-emerald-400 font-semibold bg-emerald-950/50 px-2 py-0.5 rounded border border-emerald-800/50">
+                          <span className="text-xs font-mono text-emerald-800 font-semibold bg-[#eef5f1] px-2 py-0.5 rounded border border-[#cbdad3]">
                             {activeScenario.confidence}% Match
                           </span>
                         </div>
                       </div>
 
-                      <div className="p-3.5 rounded-xl bg-zinc-950/90 border border-zinc-800">
-                        <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider block">
+                      <div className="p-3.5 rounded-lg bg-white border border-slate-200 shadow-sm">
+                        <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
                           Assessed Priority
                         </span>
                         <div className="mt-1 flex items-center gap-2">
                           {activeScenario.priority === "urgent" && (
-                            <span className="px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-red-950/90 text-red-300 border border-red-700/60 flex items-center gap-1.5">
-                              <Flame className="size-3.5" />
+                            <span className="px-2.5 py-1 rounded text-xs font-bold uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200 flex items-center gap-1.5">
+                              <Flame className="size-3.5 text-rose-600" />
                               Urgent Hazard
                             </span>
                           )}
                           {activeScenario.priority === "high" && (
-                            <span className="px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-amber-950/90 text-amber-300 border border-amber-700/60 flex items-center gap-1.5">
-                              <AlertTriangle className="size-3.5" />
+                            <span className="px-2.5 py-1 rounded text-xs font-bold uppercase tracking-wider bg-amber-50 text-amber-800 border border-amber-200 flex items-center gap-1.5">
+                              <AlertTriangle className="size-3.5 text-amber-600" />
                               High Priority
                             </span>
                           )}
                           {activeScenario.priority === "medium" && (
-                            <span className="px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-blue-950/90 text-blue-300 border border-blue-700/60 flex items-center gap-1.5">
-                              <Wrench className="size-3.5" />
+                            <span className="px-2.5 py-1 rounded text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1.5">
+                              <Wrench className="size-3.5 text-emerald-700" />
                               Standard Routine
                             </span>
                           )}
                         </div>
                       </div>
 
-                      <div className="p-3.5 rounded-xl bg-zinc-950/90 border border-zinc-800">
-                        <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider block">
+                      <div className="p-3.5 rounded-lg bg-white border border-slate-200 shadow-sm">
+                        <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
                           Contractor Match
                         </span>
-                        <div className="mt-1 flex items-center gap-1.5 text-xs text-emerald-400 font-medium">
-                          <ShieldCheck className="size-4 shrink-0 text-emerald-400" />
+                        <div className="mt-1 flex items-center gap-1.5 text-xs text-emerald-800 font-semibold truncate">
+                          <ShieldCheck className="size-4 shrink-0 text-emerald-700" />
                           <span className="truncate">{activeScenario.matchedVendor.name}</span>
                         </div>
-                        <span className="text-[10px] text-zinc-500 block truncate">
+                        <span className="text-[10px] text-slate-400 block truncate mt-0.5">
                           {activeScenario.matchedVendor.insurance}
                         </span>
                       </div>
                     </div>
 
                     {/* AI Safety Assessment & Reasoning */}
-                    <div className="p-4 rounded-xl bg-gradient-to-r from-violet-950/30 to-indigo-950/20 border border-violet-500/30">
-                      <div className="flex items-center gap-2 text-violet-300 text-xs font-semibold mb-1">
+                    <div className="p-4 rounded-lg bg-[#073b3a] text-white space-y-1.5 shadow-sm">
+                      <div className="flex items-center gap-2 text-emerald-300 text-xs font-semibold">
                         <Sparkles className="size-3.5" />
                         <span>AI Diagnostic Rationale</span>
                       </div>
-                      <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-emerald-50/90 leading-relaxed font-sans">
                         {activeScenario.aiInsight}
                       </p>
                     </div>
 
                     {/* Automated Drafted Tenant Response */}
                     <div className="space-y-2">
-                      <div className="flex items-center justify-between text-xs text-zinc-400">
+                      <div className="flex items-center justify-between text-xs text-slate-500">
                         <span className="font-semibold uppercase tracking-wider flex items-center gap-1.5">
-                          <Send className="size-3.5 text-blue-400" />
-                          Automated Tenant Dispatch Notice (SMS / Email)
+                          <Send className="size-3.5 text-emerald-700" />
+                          Automated Tenant Notice (SMS / Email)
                         </span>
-                        <span className="text-zinc-500 font-mono text-[11px]">Ready to send</span>
+                        <span className="text-slate-400 font-mono text-[11px]">Ready to dispatch</span>
                       </div>
-                      <div className="p-4 rounded-xl bg-zinc-950/90 border border-zinc-800 text-xs sm:text-sm text-zinc-300 leading-relaxed italic">
+                      <div className="p-4 rounded-lg bg-white border border-slate-200 text-xs sm:text-sm text-slate-700 leading-relaxed italic shadow-sm">
                         &ldquo;{activeScenario.autoDraftReply}&rdquo;
                       </div>
                     </div>

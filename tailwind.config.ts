@@ -59,6 +59,21 @@ const config = {
           text: "var(--ai-text)",
           accent: "var(--ai-accent)",
         },
+        forest: {
+          DEFAULT: "#073b3a",
+          hover: "#0a504d",
+          dark: "#0b292b",
+          light: "#0e4d4b",
+        },
+        refined: {
+          bg: "#fbfcfa",
+          surface: "#ffffff",
+          subtle: "#eef5f1",
+          border: "#dfe8e3",
+          borderDark: "#cbdad3",
+          emerald: "#047857",
+          emeraldSoft: "#16856f",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -25,13 +25,18 @@ async function bootstrapOrg(params: {
   const slug = `${baseSlug}-${uniqueSuffix}`;
   const apiKey = `ok_live_${crypto.randomUUID().replace(/-/g, "")}`;
 
+  const trialEndsAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
+  const subscriptionStatus = "trialing";
+
   // 1. Create Organization
-  const { data: org, error: orgError } = await admin
+  let orgResult = await admin
     .from("organizations")
     .insert({
       name: params.orgName.trim(),
       slug,
       api_key: apiKey,
+      trial_ends_at: trialEndsAt,
+      subscription_status: subscriptionStatus,
       feature_flags: {
         ai_triage: true,
         ai_vendor_suggestion: true,
@@ -40,10 +45,43 @@ async function bootstrapOrg(params: {
         ai_duplicate_detect: true,
         sdk_enabled: true,
         api_enabled: true,
+        trial_ends_at: trialEndsAt,
+        subscription_status: subscriptionStatus,
       },
     })
     .select("id, slug")
     .single();
+
+  // Gracefully fallback to feature_flags if database column migration is not yet applied
+  if (
+    orgResult.error &&
+    (orgResult.error.message?.includes("column") ||
+      orgResult.error.code === "42703" ||
+      orgResult.error.code === "PGRST204")
+  ) {
+    orgResult = await admin
+      .from("organizations")
+      .insert({
+        name: params.orgName.trim(),
+        slug,
+        api_key: apiKey,
+        feature_flags: {
+          ai_triage: true,
+          ai_vendor_suggestion: true,
+          ai_draft_message: true,
+          ai_monthly_report: true,
+          ai_duplicate_detect: true,
+          sdk_enabled: true,
+          api_enabled: true,
+          trial_ends_at: trialEndsAt,
+          subscription_status: subscriptionStatus,
+        },
+      })
+      .select("id, slug")
+      .single();
+  }
+
+  const { data: org, error: orgError } = orgResult;
 
   if (orgError || !org) {
     throw new Error(`Failed to create organization: ${orgError?.message || "Unknown error"}`);

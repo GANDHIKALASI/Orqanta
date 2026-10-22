@@ -138,11 +138,11 @@ export function FloatingChatbot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="group relative flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 text-white font-medium shadow-2xl shadow-violet-500/30 border border-white/20 transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-violet-500/50"
+          className="group relative flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#073b3a] hover:bg-[#0a504d] text-white font-medium shadow-xl shadow-[#073b3a]/25 border border-emerald-600/30 transition-all duration-300 hover:scale-105 active:scale-95"
           aria-label="Open Orqanta AI Assistant"
         >
           <div className="relative">
-            <Sparkles className="size-5 text-white animate-pulse" />
+            <Sparkles className="size-5 text-emerald-300 animate-pulse" />
             <span className="absolute -top-1 -right-1 size-2 rounded-full bg-emerald-400 animate-ping" />
           </div>
           <span className="text-sm font-semibold tracking-tight pr-0.5">
@@ -153,27 +153,21 @@ export function FloatingChatbot() {
 
       {/* Floating Chat Modal Card */}
       {isOpen && (
-        <div className="w-[360px] sm:w-[420px] h-[560px] max-h-[85vh] flex flex-col rounded-2xl bg-zinc-950 text-white border border-zinc-800 shadow-2xl shadow-black/80 overflow-hidden animate-in fade-in slide-in-from-bottom-6 duration-300 backdrop-blur-xl">
+        <div className="w-[360px] sm:w-[420px] h-[560px] max-h-[85vh] flex flex-col rounded-2xl bg-[#fbfcfa] text-[#0b292b] border border-[#dfe8e3] shadow-2xl shadow-[#073b3a]/20 overflow-hidden animate-in fade-in slide-in-from-bottom-6 duration-300">
           {/* Header Bar */}
-          <div className="px-4 py-3 bg-zinc-900/90 border-b border-zinc-800 flex items-center justify-between">
+          <div className="px-4 py-3 bg-[#073b3a] text-white border-b border-[#0b292b] flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="size-8 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center shadow-inner">
-                <Image
-                  src="/logo-icon.png"
-                  alt="Orqanta"
-                  width={22}
-                  height={22}
-                  className="size-5 object-contain"
-                />
+              <div className="size-8 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center shadow-inner">
+                <Sparkles className="size-4 text-emerald-300" />
               </div>
               <div className="flex flex-col">
-                <span className="text-sm font-bold text-white tracking-tight flex items-center gap-1.5">
+                <span className="text-sm font-semibold text-white tracking-tight flex items-center gap-1.5">
                   Orqanta AI
-                  <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-violet-500/20 text-violet-300 border border-violet-500/30">
+                  <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-700/50">
                     Copilot
                   </span>
                 </span>
-                <span className="text-[11px] text-emerald-400 font-medium flex items-center gap-1">
+                <span className="text-[11px] text-emerald-200 font-medium flex items-center gap-1">
                   <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   Maintenance Expert Online
                 </span>
@@ -184,14 +178,14 @@ export function FloatingChatbot() {
               <button
                 onClick={handleClear}
                 title="Clear Chat"
-                className="p-1.5 rounded-md text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+                className="p-1.5 rounded-md text-emerald-100/70 hover:text-white hover:bg-white/10 transition-colors"
               >
                 <Trash2 className="size-4" />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
                 title="Close"
-                className="p-1.5 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
+                className="p-1.5 rounded-md text-emerald-100/70 hover:text-white hover:bg-white/10 transition-colors"
               >
                 <Minimize2 className="size-4" />
               </button>
@@ -210,24 +204,24 @@ export function FloatingChatbot() {
                   }`}
                 >
                   {isAi && (
-                    <div className="size-7 rounded-lg bg-gradient-to-tr from-violet-600 to-blue-600 flex items-center justify-center shrink-0 shadow-md">
-                      <Sparkles className="size-3.5 text-white" />
+                    <div className="size-7 rounded-lg bg-[#eef5f1] border border-[#cbdad3] flex items-center justify-center shrink-0 shadow-sm text-emerald-700">
+                      <Sparkles className="size-3.5" />
                     </div>
                   )}
 
                   <div
                     className={`max-w-[82%] px-3.5 py-2.5 rounded-2xl leading-relaxed whitespace-pre-wrap ${
                       isAi
-                        ? "bg-zinc-900/90 text-zinc-200 border border-zinc-800/90 shadow-sm rounded-tl-sm"
-                        : "bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-md rounded-tr-sm font-medium"
+                        ? "bg-white text-slate-800 border border-[#dfe8e3] shadow-sm rounded-tl-sm"
+                        : "bg-[#073b3a] text-white shadow-sm rounded-tr-sm font-medium"
                     }`}
                   >
                     {msg.content}
                   </div>
 
                   {!isAi && (
-                    <div className="size-7 rounded-lg bg-zinc-800 border border-zinc-700 flex items-center justify-center shrink-0">
-                      <User className="size-3.5 text-zinc-300" />
+                    <div className="size-7 rounded-lg bg-slate-200 border border-slate-300 flex items-center justify-center shrink-0">
+                      <User className="size-3.5 text-slate-600" />
                     </div>
                   )}
                 </div>
@@ -237,11 +231,11 @@ export function FloatingChatbot() {
             {/* Loading Indicator */}
             {isLoading && (
               <div className="flex items-start gap-2.5">
-                <div className="size-7 rounded-lg bg-gradient-to-tr from-violet-600 to-blue-600 flex items-center justify-center shrink-0 shadow-md">
-                  <Sparkles className="size-3.5 text-white" />
+                <div className="size-7 rounded-lg bg-[#eef5f1] border border-[#cbdad3] flex items-center justify-center shrink-0 shadow-sm text-emerald-700">
+                  <Sparkles className="size-3.5" />
                 </div>
-                <div className="px-4 py-3 rounded-2xl bg-zinc-900 border border-zinc-800 text-zinc-400 flex items-center gap-2 rounded-tl-sm">
-                  <Loader2 className="size-3.5 animate-spin text-violet-400" />
+                <div className="px-4 py-3 rounded-2xl bg-white border border-[#dfe8e3] text-slate-500 flex items-center gap-2 rounded-tl-sm shadow-sm">
+                  <Loader2 className="size-3.5 animate-spin text-emerald-700" />
                   <span className="text-[11px] font-mono">
                     Orqanta AI is thinking...
                   </span>
@@ -252,10 +246,10 @@ export function FloatingChatbot() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Suggested Starter Chips (show when only 1 welcome message is present) */}
+          {/* Suggested Starter Chips */}
           {messages.length <= 1 && (
             <div className="px-4 pb-2">
-              <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider block mb-1.5">
+              <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-1.5">
                 Quick Questions
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -263,7 +257,7 @@ export function FloatingChatbot() {
                   <button
                     key={prompt}
                     onClick={() => handleSend(prompt)}
-                    className="text-[11px] px-2.5 py-1 rounded-full bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 hover:border-zinc-700 transition-colors text-left"
+                    className="text-[11px] px-2.5 py-1 rounded-full bg-white hover:bg-[#eef5f1] text-slate-700 hover:text-[#073b3a] border border-[#dfe8e3] hover:border-emerald-600/40 transition-colors text-left shadow-xs"
                   >
                     {prompt}
                   </button>
@@ -273,7 +267,7 @@ export function FloatingChatbot() {
           )}
 
           {/* Input Footer */}
-          <div className="p-3 bg-zinc-900/95 border-t border-zinc-800">
+          <div className="p-3 bg-white border-t border-[#dfe8e3]">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -289,13 +283,13 @@ export function FloatingChatbot() {
                 onKeyDown={handleKeyDown}
                 placeholder="Ask about repairs, triage, or vendors..."
                 disabled={isLoading}
-                className="flex-1 bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-violet-500/70"
+                className="flex-1 bg-[#fbfcfa] border border-[#dfe8e3] rounded-xl px-3.5 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-emerald-600"
               />
               <Button
                 type="submit"
                 size="icon"
                 disabled={isLoading || !input.trim()}
-                className="size-9 bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 text-white rounded-xl shrink-0 shadow-md transition-transform active:scale-95"
+                className="size-9 bg-[#073b3a] hover:bg-[#0a504d] text-white rounded-xl shrink-0 shadow-sm transition-transform active:scale-95"
               >
                 {isLoading ? (
                   <Loader2 className="size-4 animate-spin" />
@@ -304,7 +298,7 @@ export function FloatingChatbot() {
                 )}
               </Button>
             </form>
-            <div className="mt-1 text-center text-[10px] text-zinc-500">
+            <div className="mt-1.5 text-center text-[10px] text-slate-400">
               Orqanta AI provides maintenance guidance. Always verify shutoff valve safety in person.
             </div>
           </div>

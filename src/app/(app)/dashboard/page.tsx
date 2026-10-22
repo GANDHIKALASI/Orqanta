@@ -8,6 +8,7 @@ import {
   ArrowRight,
   Activity,
   Plus,
+  Sparkles,
 } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -27,7 +28,7 @@ export default async function DashboardPage() {
     ordersRes,
     activityRes,
   ] = await Promise.all([
-    supabase.from("properties").select("id, units"),
+    supabase.from("properties").select("id, name, units"),
     supabase.from("vendors").select("id"),
     supabase.from("profiles").select("id").eq("role", "tenant"),
     supabase
@@ -47,6 +48,8 @@ export default async function DashboardPage() {
   const allOrders = ordersRes.data || [];
   const activities = activityRes.data || [];
 
+  const isDemoActive = allOrders.some((o) => o.title?.includes("[Demo]")) || properties.some((p) => p.name?.includes("[Demo]"));
+
   const totalUnits = properties.reduce((acc, p) => acc + (p.units || 1), 0);
   const openOrders = allOrders.filter((o) => o.status === "open");
   const inProgressOrders = allOrders.filter((o) => o.status === "in_progress");
@@ -56,6 +59,18 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-8">
+      {/* Demo Mode Indicator Banner */}
+      {isDemoActive && (
+        <div className="p-3 px-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 flex items-center justify-between text-xs backdrop-blur-sm">
+          <div className="flex items-center gap-2.5 text-emerald-800 dark:text-emerald-300 font-medium">
+            <Sparkles className="size-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+            <span>
+              <strong>Demo Mode Active:</strong> Sample properties, specialized contractors, and AI work orders are loaded. Use the <strong>Demo Data</strong> toggle in the topbar anytime to return to a clean workspace.
+            </span>
+          </div>
+        </div>
+      )}
+
       {/* 3-Step Setup Checklist (Disappears when all complete) */}
       <OnboardingChecklist
         propertyCount={properties.length}

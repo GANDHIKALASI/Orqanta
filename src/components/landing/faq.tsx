@@ -15,14 +15,14 @@ const faqs: FaqItem[] = [
       "When a tenant submits a ticket with text descriptions and photos, Orqanta AI processes the request asynchronously. It extracts severity cues, matches the exact trade category (e.g., Plumbing, Electrical, HVAC, Appliance, Roofing), and queries your organization's vetted vendor directory to recommend the best contractor with active insurance.",
   },
   {
-    question: "Can I embed the ticket submission form on my existing website?",
+    question: "Can I collect maintenance requests without making tenants download another app?",
     answer:
-      "Yes! Orqanta provides a lightweight, zero-login Public SDK (~3KB). You simply paste a <script> tag and specify your unique org API key found in your Workspace Settings. Tenants can submit tickets directly from any marketing website, WordPress site, or resident portal without needing to remember another password.",
+      "Yes! Orqanta gives you instant QR codes and direct web ticketing links for every building. You can place QR stickers in common areas or link directly from your resident emails. Tenants can submit tickets and attach photos in seconds with zero login friction.",
   },
   {
-    question: "Is my organization's property data private from other companies?",
+    question: "Is my organization's property data private and secure?",
     answer:
-      "100% yes. Orqanta is architected on Supabase PostgreSQL with strict Row Level Security (RLS) policies. Every query automatically verifies your organization's JWT claims via an auth_org_id() token hook. It is cryptographically impossible for any tenant or property manager to access records outside their own organization.",
+      "100% yes. Orqanta enforces enterprise-grade multi-property data isolation. Every work order, building record, tenant conversation, and vendor contract is strictly compartmentalized to your workspace with bank-level encryption. Other property managers or external parties can never access your records.",
   },
   {
     question: "What happens if a contractor's insurance policy expires?",
@@ -44,17 +44,16 @@ export function LandingFaq() {
   };
 
   return (
-    <section id="faq" className="py-24 bg-zinc-950 relative overflow-hidden border-t border-zinc-900">
+    <section id="faq" className="py-24 bg-white border-t border-[#dfe8e3] relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-semibold mb-4">
-            <HelpCircle className="size-3.5 text-blue-400" />
-            <span>Frequently Asked Questions</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+          <p className="text-xs font-semibold uppercase tracking-[.2em] text-emerald-700 mb-3">
+            Frequently Asked Questions
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-[-.04em] text-[#073b3a]">
             Everything You Need to Know
           </h2>
-          <p className="mt-3 text-base text-zinc-400">
+          <p className="mt-3 text-base text-slate-600">
             Have questions about integrations, security, or deployment? We&apos;ve got answers.
           </p>
         </div>
@@ -65,24 +64,28 @@ export function LandingFaq() {
             return (
               <div
                 key={faq.question}
-                className="rounded-xl border border-zinc-800/90 bg-zinc-900/60 overflow-hidden transition-all duration-200"
+                className={`rounded-xl border transition-all duration-200 overflow-hidden ${
+                  isOpen
+                    ? "border-emerald-600/40 bg-white shadow-sm"
+                    : "border-slate-200/90 bg-[#fbfcfa] hover:border-slate-300"
+                }`}
               >
                 <button
                   type="button"
                   onClick={() => toggle(idx)}
-                  className="w-full px-6 py-4 text-left flex items-center justify-between gap-4 hover:bg-zinc-800/40 transition-colors"
+                  className="w-full px-6 py-4.5 text-left flex items-center justify-between gap-4 hover:bg-slate-50/50 transition-colors"
                 >
-                  <span className="font-semibold text-white text-base">
+                  <span className="font-semibold text-[#073b3a] text-base">
                     {faq.question}
                   </span>
                   <ChevronDown
-                    className={`size-4 text-zinc-400 shrink-0 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-blue-400" : ""
+                    className={`size-4 shrink-0 transition-transform duration-200 ${
+                      isOpen ? "rotate-180 text-emerald-700" : "text-slate-400"
                     }`}
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-6 pb-5 pt-1 text-sm text-zinc-400 leading-relaxed border-t border-zinc-800/50">
+                  <div className="px-6 pb-5 pt-1 text-sm text-slate-600 leading-relaxed border-t border-slate-100">
                     {faq.answer}
                   </div>
                 )}
@@ -94,3 +97,4 @@ export function LandingFaq() {
     </section>
   );
 }
+

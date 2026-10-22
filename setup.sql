@@ -37,6 +37,8 @@ CREATE TABLE IF NOT EXISTS public.organizations (
     "api_enabled": true
   }'::jsonb,
   api_key text UNIQUE,
+  trial_ends_at timestamptz DEFAULT (now() + interval '7 days'),
+  subscription_status text NOT NULL DEFAULT 'trialing' CHECK (subscription_status IN ('trialing', 'active', 'locked')),
   created_at timestamptz DEFAULT now()
 );
 
@@ -290,3 +292,15 @@ GRANT USAGE ON SCHEMA public TO supabase_auth_admin;
 GRANT EXECUTE ON FUNCTION public.custom_access_token_hook TO supabase_auth_admin;
 GRANT SELECT ON TABLE public.profiles TO supabase_auth_admin;
 REVOKE EXECUTE ON FUNCTION public.custom_access_token_hook FROM authenticated, anon, public;
+
+-- ==============================================================================
+-- 9. MIGRATIONS
+-- ==============================================================================
+-- Add 7-Day Trial and Subscription Status to Organizations
+ALTER TABLE public.organizations 
+  ADD COLUMN IF NOT EXISTS trial_ends_at timestamptz DEFAULT (now() + interval '7 days');
+
+ALTER TABLE public.organizations 
+  ADD COLUMN IF NOT EXISTS subscription_status text NOT NULL DEFAULT 'trialing' 
+  CHECK (subscription_status IN ('trialing', 'active', 'locked'));
+

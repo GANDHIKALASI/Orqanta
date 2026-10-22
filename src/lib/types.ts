@@ -30,12 +30,19 @@ export interface FeatureFlags {
   api_enabled: boolean;
 }
 
+export type SubscriptionStatus = "trialing" | "active" | "locked";
+
 export interface Organization {
   id: string;
   name: string;
   slug: string;
-  feature_flags: FeatureFlags;
+  feature_flags: FeatureFlags & {
+    trial_ends_at?: string;
+    subscription_status?: SubscriptionStatus;
+  };
   api_key: string | null;
+  trial_ends_at?: string;
+  subscription_status?: SubscriptionStatus;
   created_at: string;
 }
 

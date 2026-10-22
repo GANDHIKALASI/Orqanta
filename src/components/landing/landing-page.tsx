@@ -8,6 +8,7 @@ import { InteractiveTriageDemo } from "./interactive-triage-demo";
 import { LandingFeatures } from "./features";
 import { LandingHowItWorks } from "./how-it-works";
 import { LandingComparisonRoi } from "./comparison-roi";
+import { LandingPricing } from "./pricing";
 import { LandingFaq } from "./faq";
 import { LandingCtaBanner } from "./cta-banner";
 import { LandingFooter } from "./footer";
@@ -26,10 +27,10 @@ export function LandingPage({ isAuthenticated, userEmail }: LandingPageProps) {
   });
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white selection:bg-violet-500/30 selection:text-violet-200">
+    <div className="min-h-screen bg-[#fbfcfa] text-[#0b292b] selection:bg-emerald-100 selection:text-emerald-900 font-sans">
       {/* Top Scroll Progress Indicator */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 origin-left z-50 shadow-[0_0_12px_rgba(139,92,246,0.8)]"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-[#073b3a] origin-left z-50"
         style={{ scaleX }}
       />
 
@@ -50,6 +51,9 @@ export function LandingPage({ isAuthenticated, userEmail }: LandingPageProps) {
 
       {/* ROI & Side-by-Side Comparison */}
       <LandingComparisonRoi />
+
+      {/* Transparent Pricing (₹199/mo & ₹1999/yr) */}
+      <LandingPricing isAuthenticated={isAuthenticated} />
 
       {/* Frequently Asked Questions */}
       <LandingFaq />

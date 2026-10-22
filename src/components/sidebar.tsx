@@ -12,6 +12,7 @@ import {
   KeyRound,
   BarChart3,
   Settings,
+  CreditCard,
   LogOut,
   ChevronRight,
   ShieldCheck,
@@ -57,6 +58,11 @@ const navItems = [
     title: "Reports",
     href: "/reports",
     icon: BarChart3,
+  },
+  {
+    title: "Billing & Plans",
+    href: "/billing",
+    icon: CreditCard,
   },
   {
     title: "Settings",
