@@ -16,11 +16,12 @@ import {
   LogOut,
   ChevronRight,
   ShieldCheck,
+  PanelLeftClose,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { logoutAction } from "@/app/(auth)/actions";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+import { useSidebar } from "./sidebar-context";
 
 interface SidebarProps {
   userEmail?: string;
@@ -73,6 +74,7 @@ const navItems = [
 
 export function Sidebar({ userEmail, userName, orgName }: SidebarProps) {
   const pathname = usePathname();
+  const { toggleSidebar } = useSidebar();
 
   const initials = userName
     ? userName
@@ -87,20 +89,32 @@ export function Sidebar({ userEmail, userName, orgName }: SidebarProps) {
     <aside className="w-64 flex flex-col justify-between bg-zinc-950 text-zinc-200 border-r border-zinc-800/80 min-h-screen select-none shrink-0">
       {/* Brand & Organization */}
       <div className="flex flex-col">
-        <div className="h-16 px-5 flex items-center justify-between border-b border-zinc-900">
+        <div className="h-16 px-4 flex items-center justify-between border-b border-zinc-900">
           <Link href="/dashboard" className="flex items-center gap-2 group">
             <Image
-              src="/orqanta-logo.png"
+              src="/orqanta-logo-white.png"
               alt="Orqanta"
               width={130}
-              height={45}
-              className="h-7 w-auto object-contain filter brightness-0 invert"
+              height={36}
+              className="h-7 w-auto object-contain"
               priority
             />
           </Link>
-          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800/60 truncate max-w-[90px]">
-            {orgName || "Workspace"}
-          </span>
+
+          <div className="flex items-center gap-1.5">
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800/60 truncate max-w-[80px]">
+              {orgName || "Workspace"}
+            </span>
+
+            {/* Hide Sidebar Button */}
+            <button
+              onClick={toggleSidebar}
+              title="Hide sidebar"
+              className="hidden md:flex p-1 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-850 transition-colors"
+            >
+              <PanelLeftClose className="size-4" />
+            </button>
+          </div>
         </div>
 
         {/* Navigation Links */}

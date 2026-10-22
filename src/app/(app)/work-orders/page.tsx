@@ -1,18 +1,37 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { Wrench, Plus, ArrowUpRight, Sparkles, Building2 } from "lucide-react";
+import { Wrench, Plus, ArrowUpRight, Sparkles, Building2, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { StatusBadge } from "@/components/status-badge";
 import { PriorityBadge } from "@/components/priority-badge";
 import { formatDate } from "@/lib/utils";
 
-export default async function WorkOrdersPage() {
+interface WorkOrdersPageProps {
+  searchParams?: {
+    status?: string;
+    priority?: string;
+  };
+}
+
+export default async function WorkOrdersPage({ searchParams }: WorkOrdersPageProps) {
   const supabase = createClient();
-  const { data: workOrders } = await supabase
+  
+  let query = supabase
     .from("work_orders")
     .select("*, property:properties(name)")
     .order("created_at", { ascending: false });
+
+  if (searchParams?.status) {
+    query = query.eq("status", searchParams.status);
+  }
+  if (searchParams?.priority) {
+    query = query.eq("priority", searchParams.priority);
+  }
+
+  const { data: workOrders } = await query;
+  const orders = workOrders || [];
+
+  const activeFilter = searchParams?.status || searchParams?.priority || "all";
 
   return (
     <div className="space-y-6 max-w-7xl">
@@ -35,27 +54,92 @@ export default async function WorkOrdersPage() {
         </Link>
       </div>
 
+      {/* Filter Tabs */}
+      <div className="flex flex-wrap items-center gap-2 pb-1 border-b border-[#dfe8e3]">
+        <Link
+          href="/work-orders"
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            activeFilter === "all"
+              ? "bg-[#073b3a] text-white shadow-sm"
+              : "bg-white text-slate-600 hover:text-[#073b3a] hover:bg-[#eef5f1] border border-[#dfe8e3]"
+          }`}
+        >
+          All Requests
+        </Link>
+        <Link
+          href="/work-orders?status=open"
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            activeFilter === "open"
+              ? "bg-[#073b3a] text-white shadow-sm"
+              : "bg-white text-slate-600 hover:text-[#073b3a] hover:bg-[#eef5f1] border border-[#dfe8e3]"
+          }`}
+        >
+          Open Queue
+        </Link>
+        <Link
+          href="/work-orders?status=in_progress"
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            activeFilter === "in_progress"
+              ? "bg-[#073b3a] text-white shadow-sm"
+              : "bg-white text-slate-600 hover:text-[#073b3a] hover:bg-[#eef5f1] border border-[#dfe8e3]"
+          }`}
+        >
+          In Progress
+        </Link>
+        <Link
+          href="/work-orders?priority=urgent"
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            activeFilter === "urgent"
+              ? "bg-rose-700 text-white shadow-sm"
+              : "bg-white text-rose-700 hover:bg-rose-50 border border-rose-200"
+          }`}
+        >
+          High / Urgent
+        </Link>
+        <Link
+          href="/work-orders?status=resolved"
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            activeFilter === "resolved"
+              ? "bg-emerald-700 text-white shadow-sm"
+              : "bg-white text-emerald-700 hover:bg-emerald-50 border border-emerald-200"
+          }`}
+        >
+          Resolved
+        </Link>
+      </div>
+
       {/* Orders List / Table */}
-      {!workOrders || workOrders.length === 0 ? (
+      {orders.length === 0 ? (
         <div className="rounded-xl border-2 border-dashed border-[#dfe8e3] bg-white p-16 text-center shadow-sm">
           <div className="size-12 rounded-full bg-[#f2f8f6] text-[#073b3a] flex items-center justify-center mx-auto mb-3">
             <Wrench className="size-5 text-emerald-700" />
           </div>
           <h3 className="font-semibold text-[#073b3a] text-base">
-            No work orders recorded
+            No work orders found {activeFilter !== "all" && `under "${activeFilter}"`}
           </h3>
           <p className="text-xs text-slate-500 max-w-sm mx-auto mt-1 mb-5">
-            Create a ticket manually or share the tenant portal link to begin logging requests.
+            {activeFilter !== "all"
+              ? "Try switching to 'All Requests' or create a new maintenance work order."
+              : "Create a ticket manually or share the tenant portal link to begin logging requests."}
           </p>
-          <Link href="/work-orders/new">
-            <Button size="sm" className="bg-[#073b3a] hover:bg-[#0b4847] text-white font-medium">
-              Create First Work Order
-            </Button>
-          </Link>
+          <div className="flex justify-center gap-3">
+            {activeFilter !== "all" && (
+              <Link href="/work-orders">
+                <Button size="sm" variant="outline" className="border-[#dfe8e3]">
+                  View All Requests
+                </Button>
+              </Link>
+            )}
+            <Link href="/work-orders/new">
+              <Button size="sm" className="bg-[#073b3a] hover:bg-[#0b4847] text-white font-medium">
+                Create Work Order
+              </Button>
+            </Link>
+          </div>
         </div>
       ) : (
         <div className="space-y-3">
-          {workOrders.map((order) => (
+          {orders.map((order) => (
             <Link
               key={order.id}
               href={`/work-orders/${order.id}`}

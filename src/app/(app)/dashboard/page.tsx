@@ -9,14 +9,16 @@ import {
   Activity,
   Plus,
   Sparkles,
-  CheckCircle2,
+  Users,
+  KeyRound,
+  ArrowUpRight,
 } from "lucide-react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/status-badge";
 import { PriorityBadge } from "@/components/priority-badge";
 import { OnboardingChecklist } from "@/components/onboarding-checklist";
+import { DashboardTickets } from "./dashboard-tickets";
 import { formatDate, formatRelativeTime } from "@/lib/utils";
+import { DemoDataToggle } from "@/components/demo-data-toggle";
 
 export default async function DashboardPage() {
   const supabase = createClient();
@@ -60,11 +62,9 @@ export default async function DashboardPage() {
     (o) => o.priority === "urgent" || o.priority === "high"
   );
 
-  const recentOrders = allOrders.slice(0, 6);
-
   // Dynamic AI Assist Recommendation based on live portfolio state
   let assistHeadline = "All properties operating normally.";
-  let assistDetail = "No pending maintenance escalations. Routine inspections are on schedule.";
+  let assistDetail = "No pending maintenance escalations. Routine inspections and vendor schedules are on track.";
   let assistActionText = "Create New Work Order";
   let assistActionHref = "/work-orders/new";
 
@@ -77,23 +77,26 @@ export default async function DashboardPage() {
     assistHeadline = `${openOrders.length} incoming ticket${openOrders.length > 1 ? "s" : ""} awaiting triage.`;
     assistDetail = "Orqanta AI has categorized descriptions and suggested priority scores.";
     assistActionText = "View Open Queue";
-    assistActionHref = "/work-orders";
+    assistActionHref = "/work-orders?status=open";
   }
 
   return (
-    <div className="space-y-8 max-w-7xl">
+    <div className="space-y-7 max-w-7xl">
       {/* Demo Mode Indicator Banner */}
       {isDemoActive && (
-        <div className="p-3.5 px-4 rounded-xl border border-emerald-500/30 bg-[#f2f8f6] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
+        <div className="p-3.5 px-4 rounded-xl border border-emerald-500/30 bg-[#f2f8f6] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs shadow-sm">
           <div className="flex items-center gap-2.5 text-[#073b3a] font-medium">
             <Sparkles className="size-4 text-emerald-600 shrink-0" />
             <span>
-              <strong>Demo Mode Active:</strong> Sample properties, specialized contractors, and AI work orders are loaded. Click the <strong>Demo Data</strong> toggle in the topbar anytime to return to a clean workspace.
+              <strong>Demo Mode Active:</strong> Sample properties, specialized contractors, and AI work orders are loaded.
             </span>
           </div>
-          <span className="text-[11px] font-mono text-emerald-800 bg-emerald-100/60 px-2 py-0.5 rounded border border-emerald-200">
-            Interactive Test Portfolio
-          </span>
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="text-[11px] font-mono text-emerald-800 bg-emerald-100/60 px-2 py-0.5 rounded border border-emerald-200">
+              Interactive Test Mode
+            </span>
+            <DemoDataToggle initialDemoState={true} />
+          </div>
         </div>
       )}
 
@@ -104,69 +107,84 @@ export default async function DashboardPage() {
         tenantCount={tenants.length}
       />
 
-      {/* 4 Core Stat Cards — Styled matching Landing Page DashboardPreview */}
+      {/* 4 Core Stat Cards — FULLY CLICKABLE LINKS */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Open Requests */}
-        <div className="rounded-xl border border-[#dfe8e3] bg-[#f2f8f6] p-4 shadow-sm">
+        <Link
+          href="/work-orders?status=open"
+          className="group block rounded-xl border border-[#dfe8e3] bg-[#f2f8f6] p-4 shadow-sm hover:border-emerald-600/50 hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer"
+        >
           <div className="flex items-center justify-between pb-2">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 group-hover:text-emerald-800 transition-colors">
               Open Requests
             </span>
-            <div className="size-7 rounded-md bg-amber-100 text-amber-800 flex items-center justify-center">
+            <div className="size-7 rounded-md bg-amber-100 text-amber-800 flex items-center justify-center transition-transform group-hover:scale-110">
               <Clock className="size-4" />
             </div>
           </div>
           <div className="text-3xl font-bold text-[#073b3a] tracking-tight">
             {openOrders.length}
           </div>
-          <div className="mt-1 flex items-center gap-1.5 text-xs text-emerald-700 font-medium">
+          <div className="mt-1 flex items-center justify-between text-xs text-emerald-700 font-medium">
             <span>Awaiting vendor triage</span>
+            <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
           </div>
-        </div>
+        </Link>
 
         {/* In Progress */}
-        <div className="rounded-xl border border-[#dfe8e3] bg-white p-4 shadow-sm">
+        <Link
+          href="/work-orders?status=in_progress"
+          className="group block rounded-xl border border-[#dfe8e3] bg-white p-4 shadow-sm hover:border-emerald-600/50 hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer"
+        >
           <div className="flex items-center justify-between pb-2">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 group-hover:text-emerald-800 transition-colors">
               In Progress
             </span>
-            <div className="size-7 rounded-md bg-blue-100 text-blue-800 flex items-center justify-center">
+            <div className="size-7 rounded-md bg-blue-100 text-blue-800 flex items-center justify-center transition-transform group-hover:scale-110">
               <Wrench className="size-4" />
             </div>
           </div>
           <div className="text-3xl font-bold text-[#073b3a] tracking-tight">
             {inProgressOrders.length}
           </div>
-          <div className="mt-1 text-xs text-slate-500">
-            Dispatched to contractors
+          <div className="mt-1 flex items-center justify-between text-xs text-slate-500 font-medium">
+            <span>Dispatched to contractors</span>
+            <ArrowRight className="size-3 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-[#073b3a]" />
           </div>
-        </div>
+        </Link>
 
         {/* High / Urgent */}
-        <div className="rounded-xl border border-[#dfe8e3] bg-white p-4 shadow-sm">
+        <Link
+          href="/work-orders?priority=urgent"
+          className="group block rounded-xl border border-[#dfe8e3] bg-white p-4 shadow-sm hover:border-rose-300 hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer"
+        >
           <div className="flex items-center justify-between pb-2">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 group-hover:text-rose-700 transition-colors">
               High / Urgent
             </span>
-            <div className="size-7 rounded-md bg-rose-100 text-rose-800 flex items-center justify-center">
+            <div className="size-7 rounded-md bg-rose-100 text-rose-800 flex items-center justify-center transition-transform group-hover:scale-110">
               <AlertTriangle className="size-4" />
             </div>
           </div>
           <div className="text-3xl font-bold text-[#073b3a] tracking-tight">
             {urgentOrders.length}
           </div>
-          <div className="mt-1 text-xs text-rose-600 font-medium">
-            {urgentOrders.length > 0 ? "Requires manager attention" : "No urgent bottlenecks"}
+          <div className="mt-1 flex items-center justify-between text-xs text-rose-600 font-medium">
+            <span>{urgentOrders.length > 0 ? "Requires manager attention" : "No urgent bottlenecks"}</span>
+            <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
           </div>
-        </div>
+        </Link>
 
         {/* Total Portfolio */}
-        <div className="rounded-xl border border-[#dfe8e3] bg-white p-4 shadow-sm">
+        <Link
+          href="/properties"
+          className="group block rounded-xl border border-[#dfe8e3] bg-white p-4 shadow-sm hover:border-emerald-600/50 hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer"
+        >
           <div className="flex items-center justify-between pb-2">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 group-hover:text-emerald-800 transition-colors">
               Total Portfolio
             </span>
-            <div className="size-7 rounded-md bg-emerald-100 text-emerald-800 flex items-center justify-center">
+            <div className="size-7 rounded-md bg-emerald-100 text-emerald-800 flex items-center justify-center transition-transform group-hover:scale-110">
               <Building2 className="size-4" />
             </div>
           </div>
@@ -176,98 +194,66 @@ export default async function DashboardPage() {
               ({totalUnits} units)
             </span>
           </div>
-          <div className="mt-1 text-xs text-slate-500">
-            {tenants.length} registered tenant{tenants.length === 1 ? "" : "s"}
+          <div className="mt-1 flex items-center justify-between text-xs text-slate-500 font-medium">
+            <span>{tenants.length} registered tenant{tenants.length === 1 ? "" : "s"}</span>
+            <ArrowRight className="size-3 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-[#073b3a]" />
           </div>
-        </div>
+        </Link>
       </div>
 
-      {/* Main Grid: Recent Tickets & Orqanta Assist / Activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column (2 Cols): Recent Work Orders */}
-        <div className="lg:col-span-2 space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <h3 className="font-semibold text-[#073b3a] text-base">
-                Recent Maintenance Requests
-              </h3>
-              <span className="text-[11px] font-medium text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-2 py-0.5 rounded-full">
-                AI triaged
-              </span>
-            </div>
-            <Link
-              href="/work-orders"
-              className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 inline-flex items-center gap-1"
-            >
-              <span>View all ({allOrders.length})</span>
-              <ArrowRight className="size-3" />
-            </Link>
+      {/* Quick Actions Shortcuts Bar */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <Link
+          href="/work-orders/new"
+          className="flex items-center gap-2.5 p-3 rounded-xl border border-[#dfe8e3] bg-white hover:bg-[#f2f8f6] hover:border-emerald-600/40 shadow-sm transition-all text-xs font-semibold text-[#073b3a] group"
+        >
+          <div className="size-7 rounded-lg bg-[#073b3a] text-white flex items-center justify-center shrink-0 group-hover:bg-[#0b4847]">
+            <Plus className="size-4" />
           </div>
+          <span>New Work Order</span>
+        </Link>
 
-          {recentOrders.length === 0 ? (
-            <div className="rounded-xl border-2 border-dashed border-[#dfe8e3] bg-white p-12 text-center shadow-sm">
-              <div className="size-12 rounded-full bg-[#f2f8f6] text-[#073b3a] flex items-center justify-center mx-auto mb-3">
-                <Wrench className="size-5 text-emerald-700" />
-              </div>
-              <h4 className="font-semibold text-[#073b3a] text-base">
-                No maintenance requests recorded
-              </h4>
-              <p className="text-xs text-slate-500 max-w-sm mx-auto mt-1 mb-5">
-                Submit your first ticket to trigger autonomous Orqanta AI diagnostics, duplicate detection, and vendor matching.
-              </p>
-              <Link href="/work-orders/new">
-                <Button className="bg-[#073b3a] hover:bg-[#0b4847] text-white font-medium gap-1.5 shadow-sm text-xs h-9">
-                  <Plus className="size-4" />
-                  <span>Create Work Order</span>
-                </Button>
-              </Link>
-            </div>
-          ) : (
-            <div className="space-y-2.5">
-              {recentOrders.map((order) => (
-                <Link
-                  key={order.id}
-                  href={`/work-orders/${order.id}`}
-                  className="block group"
-                >
-                  <div className="rounded-xl border border-[#dfe8e3] bg-white p-4 shadow-sm hover:border-emerald-600/40 hover:shadow-md transition-all">
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                      <div className="space-y-1.5 min-w-0">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <PriorityBadge priority={order.priority} />
-                          <StatusBadge status={order.status} />
-                          {order.ai_category && (
-                            <span className="inline-flex items-center gap-1 text-[10px] font-medium text-emerald-800 bg-[#f2f8f6] px-2 py-0.5 rounded border border-emerald-200/80">
-                              <Sparkles className="size-3 text-emerald-600" />
-                              <span className="capitalize">
-                                {order.ai_category.replace("_", " ")}
-                              </span>
-                            </span>
-                          )}
-                        </div>
-                        <h4 className="font-semibold text-[#073b3a] text-sm group-hover:text-emerald-700 transition-colors truncate">
-                          {order.title}
-                        </h4>
-                        <p className="text-xs text-slate-500">
-                          {(order.property as any)?.name}{" "}
-                          {order.unit_number && `• Unit ${order.unit_number}`}
-                        </p>
-                      </div>
+        <Link
+          href="/properties"
+          className="flex items-center gap-2.5 p-3 rounded-xl border border-[#dfe8e3] bg-white hover:bg-[#f2f8f6] hover:border-emerald-600/40 shadow-sm transition-all text-xs font-semibold text-[#073b3a] group"
+        >
+          <div className="size-7 rounded-lg bg-[#eef5f1] text-emerald-700 flex items-center justify-center shrink-0 group-hover:bg-emerald-100">
+            <Building2 className="size-4" />
+          </div>
+          <span>Manage Buildings</span>
+        </Link>
 
-                      <div className="text-left sm:text-right shrink-0 text-xs text-slate-400 font-mono">
-                        {formatDate(order.created_at)}
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
+        <Link
+          href="/vendors"
+          className="flex items-center gap-2.5 p-3 rounded-xl border border-[#dfe8e3] bg-white hover:bg-[#f2f8f6] hover:border-emerald-600/40 shadow-sm transition-all text-xs font-semibold text-[#073b3a] group"
+        >
+          <div className="size-7 rounded-lg bg-[#eef5f1] text-emerald-700 flex items-center justify-center shrink-0 group-hover:bg-emerald-100">
+            <Users className="size-4" />
+          </div>
+          <span>Contractor Directory</span>
+        </Link>
+
+        <Link
+          href="/tenants"
+          className="flex items-center gap-2.5 p-3 rounded-xl border border-[#dfe8e3] bg-white hover:bg-[#f2f8f6] hover:border-emerald-600/40 shadow-sm transition-all text-xs font-semibold text-[#073b3a] group"
+        >
+          <div className="size-7 rounded-lg bg-[#eef5f1] text-emerald-700 flex items-center justify-center shrink-0 group-hover:bg-emerald-100">
+            <KeyRound className="size-4" />
+          </div>
+          <span>Tenant Portal</span>
+        </Link>
+      </div>
+
+      {/* Main Grid: Interactive Recent Tickets List & Orqanta Assist / Activity */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Left Column (2 Cols): Interactive Dashboard Tickets List */}
+        <div className="lg:col-span-2">
+          <DashboardTickets orders={allOrders} />
         </div>
 
         {/* Right Column (1 Col): Orqanta Assist Card & Activity Log */}
         <div className="space-y-6">
-          {/* Orqanta Assist Recommendation Card (Signature Landing-Style Card) */}
+          {/* Orqanta Assist Recommendation Card */}
           <div className="rounded-xl bg-[#073b3a] p-5 text-white shadow-sm flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between">
@@ -277,7 +263,7 @@ export default async function DashboardPage() {
                     Orqanta Assist
                   </span>
                 </div>
-                <span className="text-[10px] font-mono text-emerald-100/70 bg-white/10 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-mono text-emerald-100/80 bg-white/10 px-2 py-0.5 rounded">
                   Live Intelligence
                 </span>
               </div>
@@ -302,35 +288,41 @@ export default async function DashboardPage() {
 
           {/* Activity Log */}
           <div className="space-y-3">
-            <h3 className="font-semibold text-[#073b3a] text-base flex items-center gap-2">
-              <Activity className="size-4 text-emerald-700" />
-              <span>Activity Timeline</span>
-            </h3>
+            <div className="flex items-center justify-between">
+              <h3 className="font-semibold text-[#073b3a] text-base flex items-center gap-2">
+                <Activity className="size-4 text-emerald-700" />
+                <span>Activity Timeline</span>
+              </h3>
+              <span className="text-[11px] text-slate-400">Live feed</span>
+            </div>
 
-            <div className="rounded-xl border border-[#dfe8e3] bg-white p-4 shadow-sm">
+            <div className="rounded-xl border border-[#dfe8e3] bg-white p-4 shadow-sm divide-y divide-[#dfe8e3]/40">
               {activities.length === 0 ? (
                 <p className="text-xs text-slate-400 py-6 text-center">
                   No recent activity recorded.
                 </p>
               ) : (
-                <div className="space-y-3.5">
-                  {activities.map((act) => (
-                    <div key={act.id} className="flex items-start gap-2.5 text-xs">
-                      <div className="size-2 rounded-full bg-emerald-600 mt-1 shrink-0" />
-                      <div className="space-y-0.5">
-                        <p className="text-[#073b3a] font-medium">
-                          {act.action === "work_order.created" && "Work order created"}
-                          {act.action === "ai.triaged" && "Orqanta AI triaged request"}
-                          {act.action === "status.changed" && `Status moved to ${act.meta?.new_status}`}
-                          {act.action === "vendor.assigned" && "Contractor assigned"}
-                        </p>
-                        <p className="text-[10px] text-slate-400 font-mono">
-                          {formatRelativeTime(act.created_at)}
-                        </p>
-                      </div>
+                activities.map((act) => (
+                  <Link
+                    key={act.id}
+                    href={act.work_order_id ? `/work-orders/${act.work_order_id}` : "/work-orders"}
+                    className="flex items-start gap-2.5 py-3 first:pt-1 last:pb-1 group hover:bg-[#fbfcfa] -mx-2 px-2 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <div className="size-2 rounded-full bg-emerald-600 mt-1.5 shrink-0 group-hover:scale-125 transition-transform" />
+                    <div className="space-y-0.5 flex-1 min-w-0">
+                      <p className="text-[#073b3a] font-medium text-xs group-hover:text-emerald-700 transition-colors">
+                        {act.action === "work_order.created" && "Work order created"}
+                        {act.action === "ai.triaged" && "Orqanta AI triaged request"}
+                        {act.action === "status.changed" && `Status moved to ${act.meta?.new_status}`}
+                        {act.action === "vendor.assigned" && "Contractor assigned"}
+                      </p>
+                      <p className="text-[10px] text-slate-400 font-mono">
+                        {formatRelativeTime(act.created_at)}
+                      </p>
                     </div>
-                  ))}
-                </div>
+                    <ArrowUpRight className="size-3 text-slate-300 group-hover:text-emerald-700 transition-colors shrink-0" />
+                  </Link>
+                ))
               )}
             </div>
           </div>

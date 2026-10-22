@@ -86,15 +86,14 @@ export function OnboardingChecklist({
         {/* Steps Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
           {steps.map((step, idx) => {
-            const Icon = step.icon;
-
             return (
-              <div
+              <Link
                 key={step.title}
-                className={`p-3.5 rounded-lg border transition-all flex flex-col justify-between gap-3 ${
+                href={step.href}
+                className={`p-3.5 rounded-lg border transition-all flex flex-col justify-between gap-3 group cursor-pointer hover:shadow-sm hover:-translate-y-0.5 ${
                   step.done
-                    ? "bg-white/90 border-emerald-200"
-                    : "bg-white border-[#dfe8e3] hover:border-emerald-600/40"
+                    ? "bg-white/90 border-emerald-200 hover:border-emerald-400"
+                    : "bg-white border-[#dfe8e3] hover:border-emerald-600/50"
                 }`}
               >
                 <div className="space-y-1.5">
@@ -105,10 +104,10 @@ export function OnboardingChecklist({
                     {step.done ? (
                       <CheckCircle2 className="size-4 text-emerald-600" />
                     ) : (
-                      <Circle className="size-4 text-slate-300" />
+                      <Circle className="size-4 text-slate-300 group-hover:text-emerald-600 transition-colors" />
                     )}
                   </div>
-                  <h4 className="font-medium text-[#073b3a] text-sm">
+                  <h4 className="font-semibold text-[#073b3a] text-sm group-hover:text-emerald-700 transition-colors">
                     {step.title}
                   </h4>
                   <p className="text-xs text-slate-500 leading-relaxed">
@@ -116,25 +115,20 @@ export function OnboardingChecklist({
                   </p>
                 </div>
 
-                <div>
+                <div className="pt-2 border-t border-[#dfe8e3]/40">
                   {step.done ? (
-                    <span className="text-xs font-medium text-emerald-700 inline-flex items-center gap-1">
-                      Completed
+                    <span className="text-xs font-semibold text-emerald-700 inline-flex items-center gap-1 group-hover:underline">
+                      <span>Completed</span>
+                      <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" />
                     </span>
                   ) : (
-                    <Link href={step.href}>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="p-0 h-auto text-xs font-semibold text-emerald-700 hover:text-emerald-800 inline-flex items-center gap-1"
-                      >
-                        {step.actionText}
-                        <ArrowRight className="size-3" />
-                      </Button>
-                    </Link>
+                    <span className="text-xs font-semibold text-emerald-700 inline-flex items-center gap-1 group-hover:underline">
+                      <span>{step.actionText}</span>
+                      <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" />
+                    </span>
                   )}
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

@@ -3,12 +3,13 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Plus, Bell, Menu, Sparkles } from "lucide-react";
+import { Plus, Menu, PanelLeft, PanelLeftClose } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Sidebar } from "@/components/sidebar";
 import { DemoDataToggle } from "@/components/demo-data-toggle";
+import { useSidebar } from "./sidebar-context";
 
 interface TopbarProps {
   userEmail?: string;
@@ -32,15 +33,16 @@ const pageTitles: Record<string, string> = {
 export function Topbar({ userEmail, userName, orgName, isDemoMode = false }: TopbarProps) {
   const pathname = usePathname();
   const currentTitle = pageTitles[pathname] || "Orqanta Workspace";
+  const { isCollapsed, toggleSidebar } = useSidebar();
 
   return (
     <header className="h-16 px-4 md:px-8 border-b border-[#dfe8e3] bg-[#fbfcfa]/95 backdrop-blur-md flex items-center justify-between sticky top-0 z-30">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
         {/* Mobile Sheet Trigger */}
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="size-9 text-slate-600">
+              <Button variant="ghost" size="icon" className="size-9 text-slate-600 hover:text-[#073b3a]">
                 <Menu className="size-5" />
               </Button>
             </SheetTrigger>
@@ -53,6 +55,17 @@ export function Topbar({ userEmail, userName, orgName, isDemoMode = false }: Top
             </SheetContent>
           </Sheet>
         </div>
+
+        {/* Desktop Sidebar Toggle Button */}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={toggleSidebar}
+          title={isCollapsed ? "Expand sidebar" : "Hide sidebar"}
+          className="hidden md:inline-flex size-9 text-slate-600 hover:text-[#073b3a] hover:bg-[#eef5f1] transition-colors"
+        >
+          {isCollapsed ? <PanelLeft className="size-4" /> : <PanelLeftClose className="size-4" />}
+        </Button>
 
         {/* Current Page Title */}
         <div className="flex items-center gap-2.5">
@@ -69,7 +82,7 @@ export function Topbar({ userEmail, userName, orgName, isDemoMode = false }: Top
       </div>
 
       {/* Quick Actions */}
-      <div className="flex items-center gap-2.5 sm:gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
         {/* Mini Demo Data Toggle */}
         <DemoDataToggle initialDemoState={isDemoMode} />
 
