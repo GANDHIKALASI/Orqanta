@@ -90,31 +90,25 @@ export function Sidebar({ userEmail, userName, orgName }: SidebarProps) {
       {/* Brand & Organization */}
       <div className="flex flex-col">
         <div className="h-16 px-4 flex items-center justify-between border-b border-zinc-900">
-          <Link href="/dashboard" className="flex items-center gap-2 group">
+          <Link href="/dashboard" className="flex items-center group">
             <Image
               src="/orqanta-logo-white.png"
               alt="Orqanta"
-              width={130}
-              height={36}
-              className="h-7 w-auto object-contain"
+              width={140}
+              height={40}
+              className="h-8 w-auto object-contain transition-opacity group-hover:opacity-95"
               priority
             />
           </Link>
 
-          <div className="flex items-center gap-1.5">
-            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800/60 truncate max-w-[80px]">
-              {orgName || "Workspace"}
-            </span>
-
-            {/* Hide Sidebar Button */}
-            <button
-              onClick={toggleSidebar}
-              title="Hide sidebar"
-              className="hidden md:flex p-1 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-850 transition-colors"
-            >
-              <PanelLeftClose className="size-4" />
-            </button>
-          </div>
+          {/* Hide Sidebar Button */}
+          <button
+            onClick={toggleSidebar}
+            title="Hide sidebar"
+            className="hidden md:flex p-1.5 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors"
+          >
+            <PanelLeftClose className="size-4" />
+          </button>
         </div>
 
         {/* Navigation Links */}

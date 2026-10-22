@@ -82,25 +82,7 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="space-y-7 max-w-7xl">
-      {/* Demo Mode Indicator Banner */}
-      {isDemoActive && (
-        <div className="p-3.5 px-4 rounded-xl border border-emerald-500/30 bg-[#f2f8f6] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs shadow-sm">
-          <div className="flex items-center gap-2.5 text-[#073b3a] font-medium">
-            <Sparkles className="size-4 text-emerald-600 shrink-0" />
-            <span>
-              <strong>Demo Mode Active:</strong> Sample properties, specialized contractors, and AI work orders are loaded.
-            </span>
-          </div>
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="text-[11px] font-mono text-emerald-800 bg-emerald-100/60 px-2 py-0.5 rounded border border-emerald-200">
-              Interactive Test Mode
-            </span>
-            <DemoDataToggle initialDemoState={true} />
-          </div>
-        </div>
-      )}
-
+    <div className="space-y-6 max-w-7xl">
       {/* 3-Step Setup Checklist (Disappears when all complete) */}
       <OnboardingChecklist
         propertyCount={properties.length}
@@ -108,107 +90,107 @@ export default async function DashboardPage() {
         tenantCount={tenantCount}
       />
 
-      {/* 4 Core Stat Cards — FULLY CLICKABLE LINKS */}
+      {/* 4 Core Executive Stat Cards — Interactive & Elevated */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Open Requests */}
         <Link
           href="/work-orders?status=open"
-          className="group block rounded-xl border border-[#dfe8e3] bg-[#f2f8f6] p-4 shadow-sm hover:border-emerald-600/50 hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer"
+          className="group relative block rounded-2xl border border-[#dfe8e3] bg-gradient-to-br from-white via-white to-amber-50/40 p-5 shadow-xs hover:border-amber-400/60 hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer overflow-hidden"
         >
-          <div className="flex items-center justify-between pb-2">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 group-hover:text-emerald-800 transition-colors">
+          <div className="flex items-center justify-between pb-3">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 group-hover:text-amber-900 transition-colors">
               Open Requests
             </span>
-            <div className="size-7 rounded-md bg-amber-100 text-amber-800 flex items-center justify-center transition-transform group-hover:scale-110">
-              <Clock className="size-4" />
+            <div className="size-8 rounded-xl bg-amber-500/10 text-amber-700 border border-amber-500/20 flex items-center justify-center transition-transform group-hover:scale-110 shadow-xs">
+              <Clock className="size-4 text-amber-700" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-[#073b3a] tracking-tight">
+          <div className="text-3xl font-extrabold text-[#073b3a] tracking-tight">
             {openOrders.length}
           </div>
-          <div className="mt-1 flex items-center justify-between text-xs text-emerald-700 font-medium">
+          <div className="mt-2 flex items-center justify-between text-xs text-amber-800 font-medium">
             <span>Awaiting vendor triage</span>
-            <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
           </div>
         </Link>
 
         {/* In Progress */}
         <Link
           href="/work-orders?status=in_progress"
-          className="group block rounded-xl border border-[#dfe8e3] bg-white p-4 shadow-sm hover:border-emerald-600/50 hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer"
+          className="group relative block rounded-2xl border border-[#dfe8e3] bg-gradient-to-br from-white via-white to-blue-50/40 p-5 shadow-xs hover:border-blue-400/60 hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer overflow-hidden"
         >
-          <div className="flex items-center justify-between pb-2">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 group-hover:text-emerald-800 transition-colors">
+          <div className="flex items-center justify-between pb-3">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 group-hover:text-blue-900 transition-colors">
               In Progress
             </span>
-            <div className="size-7 rounded-md bg-blue-100 text-blue-800 flex items-center justify-center transition-transform group-hover:scale-110">
-              <Wrench className="size-4" />
+            <div className="size-8 rounded-xl bg-blue-500/10 text-blue-700 border border-blue-500/20 flex items-center justify-center transition-transform group-hover:scale-110 shadow-xs">
+              <Wrench className="size-4 text-blue-700" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-[#073b3a] tracking-tight">
+          <div className="text-3xl font-extrabold text-[#073b3a] tracking-tight">
             {inProgressOrders.length}
           </div>
-          <div className="mt-1 flex items-center justify-between text-xs text-slate-500 font-medium">
+          <div className="mt-2 flex items-center justify-between text-xs text-blue-800 font-medium">
             <span>Dispatched to contractors</span>
-            <ArrowRight className="size-3 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-[#073b3a]" />
+            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
           </div>
         </Link>
 
         {/* High / Urgent */}
         <Link
           href="/work-orders?priority=urgent"
-          className="group block rounded-xl border border-[#dfe8e3] bg-white p-4 shadow-sm hover:border-rose-300 hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer"
+          className="group relative block rounded-2xl border border-[#dfe8e3] bg-gradient-to-br from-white via-white to-rose-50/40 p-5 shadow-xs hover:border-rose-400/60 hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer overflow-hidden"
         >
-          <div className="flex items-center justify-between pb-2">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 group-hover:text-rose-700 transition-colors">
+          <div className="flex items-center justify-between pb-3">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 group-hover:text-rose-900 transition-colors">
               High / Urgent
             </span>
-            <div className="size-7 rounded-md bg-rose-100 text-rose-800 flex items-center justify-center transition-transform group-hover:scale-110">
-              <AlertTriangle className="size-4" />
+            <div className="size-8 rounded-xl bg-rose-500/10 text-rose-700 border border-rose-500/20 flex items-center justify-center transition-transform group-hover:scale-110 shadow-xs">
+              <AlertTriangle className="size-4 text-rose-700" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-[#073b3a] tracking-tight">
+          <div className="text-3xl font-extrabold text-[#073b3a] tracking-tight">
             {urgentOrders.length}
           </div>
-          <div className="mt-1 flex items-center justify-between text-xs text-rose-600 font-medium">
+          <div className="mt-2 flex items-center justify-between text-xs text-rose-700 font-medium">
             <span>{urgentOrders.length > 0 ? "Requires manager attention" : "No urgent bottlenecks"}</span>
-            <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
           </div>
         </Link>
 
         {/* Total Portfolio */}
         <Link
           href="/properties"
-          className="group block rounded-xl border border-[#dfe8e3] bg-white p-4 shadow-sm hover:border-emerald-600/50 hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer"
+          className="group relative block rounded-2xl border border-[#dfe8e3] bg-gradient-to-br from-white via-white to-emerald-50/40 p-5 shadow-xs hover:border-emerald-600/60 hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer overflow-hidden"
         >
-          <div className="flex items-center justify-between pb-2">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 group-hover:text-emerald-800 transition-colors">
+          <div className="flex items-center justify-between pb-3">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 group-hover:text-emerald-900 transition-colors">
               Total Portfolio
             </span>
-            <div className="size-7 rounded-md bg-emerald-100 text-emerald-800 flex items-center justify-center transition-transform group-hover:scale-110">
-              <Building2 className="size-4" />
+            <div className="size-8 rounded-xl bg-emerald-500/10 text-emerald-800 border border-emerald-500/20 flex items-center justify-center transition-transform group-hover:scale-110 shadow-xs">
+              <Building2 className="size-4 text-emerald-800" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-[#073b3a] tracking-tight">
+          <div className="text-3xl font-extrabold text-[#073b3a] tracking-tight">
             {properties.length}{" "}
-            <span className="text-sm font-normal text-slate-500">
+            <span className="text-sm font-medium text-slate-500">
               ({totalUnits} units)
             </span>
           </div>
-          <div className="mt-1 flex items-center justify-between text-xs text-slate-500 font-medium">
+          <div className="mt-2 flex items-center justify-between text-xs text-emerald-800 font-medium">
             <span>{tenantCount} registered tenant{tenantCount === 1 ? "" : "s"}</span>
-            <ArrowRight className="size-3 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-[#073b3a]" />
+            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
           </div>
         </Link>
       </div>
 
-      {/* Quick Actions Shortcuts Bar */}
+      {/* Quick Actions Navigation Strip */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <Link
           href="/work-orders/new"
-          className="flex items-center gap-2.5 p-3 rounded-xl border border-[#dfe8e3] bg-white hover:bg-[#f2f8f6] hover:border-emerald-600/40 shadow-sm transition-all text-xs font-semibold text-[#073b3a] group"
+          className="flex items-center gap-3 p-3.5 rounded-xl border border-[#dfe8e3] bg-white hover:bg-[#f2f8f6] hover:border-emerald-600/40 shadow-xs transition-all text-xs font-semibold text-[#073b3a] group hover:-translate-y-0.5"
         >
-          <div className="size-7 rounded-lg bg-[#073b3a] text-white flex items-center justify-center shrink-0 group-hover:bg-[#0b4847]">
+          <div className="size-8 rounded-lg bg-[#073b3a] text-white flex items-center justify-center shrink-0 group-hover:bg-[#0a504d] shadow-xs">
             <Plus className="size-4" />
           </div>
           <span>New Work Order</span>
@@ -216,9 +198,9 @@ export default async function DashboardPage() {
 
         <Link
           href="/properties"
-          className="flex items-center gap-2.5 p-3 rounded-xl border border-[#dfe8e3] bg-white hover:bg-[#f2f8f6] hover:border-emerald-600/40 shadow-sm transition-all text-xs font-semibold text-[#073b3a] group"
+          className="flex items-center gap-3 p-3.5 rounded-xl border border-[#dfe8e3] bg-white hover:bg-[#f2f8f6] hover:border-emerald-600/40 shadow-xs transition-all text-xs font-semibold text-[#073b3a] group hover:-translate-y-0.5"
         >
-          <div className="size-7 rounded-lg bg-[#eef5f1] text-emerald-700 flex items-center justify-center shrink-0 group-hover:bg-emerald-100">
+          <div className="size-8 rounded-lg bg-[#eef5f1] text-emerald-700 flex items-center justify-center shrink-0 group-hover:bg-emerald-100 shadow-xs">
             <Building2 className="size-4" />
           </div>
           <span>Manage Buildings</span>
@@ -226,9 +208,9 @@ export default async function DashboardPage() {
 
         <Link
           href="/vendors"
-          className="flex items-center gap-2.5 p-3 rounded-xl border border-[#dfe8e3] bg-white hover:bg-[#f2f8f6] hover:border-emerald-600/40 shadow-sm transition-all text-xs font-semibold text-[#073b3a] group"
+          className="flex items-center gap-3 p-3.5 rounded-xl border border-[#dfe8e3] bg-white hover:bg-[#f2f8f6] hover:border-emerald-600/40 shadow-xs transition-all text-xs font-semibold text-[#073b3a] group hover:-translate-y-0.5"
         >
-          <div className="size-7 rounded-lg bg-[#eef5f1] text-emerald-700 flex items-center justify-center shrink-0 group-hover:bg-emerald-100">
+          <div className="size-8 rounded-lg bg-[#eef5f1] text-emerald-700 flex items-center justify-center shrink-0 group-hover:bg-emerald-100 shadow-xs">
             <Users className="size-4" />
           </div>
           <span>Contractor Directory</span>
@@ -236,9 +218,9 @@ export default async function DashboardPage() {
 
         <Link
           href="/tenants"
-          className="flex items-center gap-2.5 p-3 rounded-xl border border-[#dfe8e3] bg-white hover:bg-[#f2f8f6] hover:border-emerald-600/40 shadow-sm transition-all text-xs font-semibold text-[#073b3a] group"
+          className="flex items-center gap-3 p-3.5 rounded-xl border border-[#dfe8e3] bg-white hover:bg-[#f2f8f6] hover:border-emerald-600/40 shadow-xs transition-all text-xs font-semibold text-[#073b3a] group hover:-translate-y-0.5"
         >
-          <div className="size-7 rounded-lg bg-[#eef5f1] text-emerald-700 flex items-center justify-center shrink-0 group-hover:bg-emerald-100">
+          <div className="size-8 rounded-lg bg-[#eef5f1] text-emerald-700 flex items-center justify-center shrink-0 group-hover:bg-emerald-100 shadow-xs">
             <KeyRound className="size-4" />
           </div>
           <span>Tenant Portal</span>
@@ -255,20 +237,26 @@ export default async function DashboardPage() {
         {/* Right Column (1 Col): Orqanta Assist Card & Activity Log */}
         <div className="space-y-6">
           {/* Orqanta Assist Recommendation Card */}
-          <div className="rounded-xl bg-[#073b3a] p-5 text-white shadow-sm flex flex-col justify-between">
+          <div className="relative rounded-2xl bg-gradient-to-br from-[#073b3a] to-[#042626] p-5 text-white shadow-md border border-emerald-500/20 overflow-hidden flex flex-col justify-between">
+            {/* Ambient subtle glow */}
+            <div className="absolute -top-12 -right-12 size-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
+
             <div>
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-emerald-200">
-                  <Sparkles className="size-4 text-emerald-300" />
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-300">
+                <div className="flex items-center gap-2">
+                  <div className="size-6 rounded-md bg-emerald-400/20 flex items-center justify-center">
+                    <Sparkles className="size-3.5 text-emerald-300" />
+                  </div>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-300">
                     Orqanta Assist
                   </span>
                 </div>
-                <span className="text-[10px] font-mono text-emerald-100/80 bg-white/10 px-2 py-0.5 rounded">
-                  Live Intelligence
+                <span className="text-[10px] font-mono font-medium text-emerald-300 bg-emerald-950/80 px-2.5 py-0.5 rounded-full border border-emerald-500/30 flex items-center gap-1.5">
+                  <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Live Copilot
                 </span>
               </div>
-              <h4 className="mt-3 text-sm font-semibold leading-5 text-white">
+              <h4 className="mt-3.5 text-sm font-semibold leading-snug text-white">
                 {assistHeadline}
               </h4>
               <p className="mt-2 text-xs leading-relaxed text-emerald-100/80">
@@ -279,10 +267,10 @@ export default async function DashboardPage() {
             <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
               <Link
                 href={assistActionHref}
-                className="text-xs font-semibold text-emerald-300 hover:text-white inline-flex items-center gap-1.5 transition-colors"
+                className="text-xs font-semibold text-emerald-300 hover:text-white inline-flex items-center gap-1.5 transition-colors group"
               >
                 <span>{assistActionText}</span>
-                <ArrowRight className="size-3.5" />
+                <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
           </div>

@@ -80,7 +80,7 @@ export default async function AppLayout({
   }
 
   const msRemaining = trialEndDate.getTime() - now.getTime();
-  const daysRemaining = Math.max(0, Math.ceil(msRemaining / (1000 * 60 * 60 * 24)));
+  const daysRemaining = Math.min(7, Math.max(0, Math.ceil(msRemaining / (1000 * 60 * 60 * 24))));
   const isDemoMode = Boolean((org?.feature_flags as Record<string, unknown>)?.demo_mode);
 
   return (
@@ -90,21 +90,21 @@ export default async function AppLayout({
       orgName={orgName}
       isDemoMode={isDemoMode}
     >
-      {/* 7-Day Trial Top Indicator Banner */}
+      {/* 7-Day Trial Top Indicator Banner — Sleek & Non-Intrusive */}
       {subscriptionStatus === "trialing" && !isBillingPage && (
-        <div className="mb-6 p-3 px-4 rounded-xl border border-amber-500/30 bg-amber-500/10 flex items-center justify-between text-xs backdrop-blur-sm">
-          <div className="flex items-center gap-2.5 text-amber-800 dark:text-amber-300 font-medium">
-            <span className="relative flex h-2 w-2">
+        <div className="mb-6 p-2.5 px-4 rounded-xl border border-amber-500/25 bg-amber-500/10 flex items-center justify-between text-xs backdrop-blur-sm shadow-xs">
+          <div className="flex items-center gap-2.5 text-amber-900 font-medium">
+            <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
             </span>
             <span>
-              7-Day Free Trial: <strong>{daysRemaining} {daysRemaining === 1 ? "day" : "days"} remaining</strong>
+              7-Day Free Trial: <strong className="font-semibold text-amber-950">{daysRemaining} {daysRemaining === 1 ? "day" : "days"} remaining</strong>
             </span>
           </div>
           <Link
             href="/billing"
-            className="font-semibold px-3 py-1 rounded-lg bg-amber-600 hover:bg-amber-500 text-white transition-all shadow-sm"
+            className="text-xs font-semibold px-3 py-1 rounded-lg bg-[#073b3a] hover:bg-[#0a504d] text-white transition-all shadow-sm"
           >
             Upgrade Plan
           </Link>
