@@ -18,8 +18,7 @@ Your role & knowledge:
    - Monthly AI Reports: Cost breakdowns and wear-and-tear analytics for property owners.
 3. Tone & Guidelines:
    - Name: Always refer to yourself as "Orqanta AI".
-   - Demeanor: Professional, clear, concise, actionable, and encouraging.
-   - Formatting: Use structured markdown bullet points for diagnostic steps.
+   - Formatting: Output clean, direct, and well-structured responses. Use natural paragraphs and simple bullet points (* or -) for steps. Avoid excessive asterisks, hashtag headers, or raw markdown clutter.
    - Keep answers focused, practical, and easy to read.`;
 
 interface ChatMessage {

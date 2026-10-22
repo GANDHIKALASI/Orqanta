@@ -14,6 +14,7 @@ import {
   Minimize2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ChatMessageContent } from "./chat-message-content";
 
 interface Message {
   id: string;
@@ -210,13 +211,13 @@ export function FloatingChatbot() {
                   )}
 
                   <div
-                    className={`max-w-[82%] px-3.5 py-2.5 rounded-2xl leading-relaxed whitespace-pre-wrap ${
+                    className={`max-w-[82%] px-3.5 py-2.5 rounded-2xl leading-relaxed ${
                       isAi
                         ? "bg-white text-slate-800 border border-[#dfe8e3] shadow-sm rounded-tl-sm"
                         : "bg-[#073b3a] text-white shadow-sm rounded-tr-sm font-medium"
                     }`}
                   >
-                    {msg.content}
+                    <ChatMessageContent content={msg.content} isAi={isAi} />
                   </div>
 
                   {!isAi && (

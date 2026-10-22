@@ -87,17 +87,7 @@ export function LandingNavbar({ isAuthenticated }: NavbarProps) {
 
         {/* Desktop Action Buttons */}
         <div className="hidden items-center gap-3 md:flex">
-          {isAuthenticated ? (
-            <Link href="/dashboard">
-              <Button
-                size="sm"
-                className="rounded-lg bg-[#073b3a] px-4 text-white hover:bg-[#0a504d] text-xs font-semibold gap-1.5 shadow-sm transition-all"
-              >
-                <span>Go to Workspace</span>
-                <ArrowRight className="size-3.5" />
-              </Button>
-            </Link>
-          ) : (
+          {!isAuthenticated && (
             <>
               <Link href="/login">
                 <Button
@@ -111,7 +101,7 @@ export function LandingNavbar({ isAuthenticated }: NavbarProps) {
               <Link href="/signup">
                 <Button
                   size="sm"
-                  className="rounded-md bg-[#073b3a] px-4 text-white hover:bg-[#0a504d] text-sm font-medium gap-1.5 shadow-sm transition-all"
+                  className="rounded-lg bg-[#073b3a] px-4 text-white hover:bg-[#0a504d] text-xs font-semibold gap-1.5 shadow-sm transition-all"
                 >
                   <span>Start Free Trial</span>
                   <ArrowRight className="size-3.5" />
@@ -180,29 +170,20 @@ export function LandingNavbar({ isAuthenticated }: NavbarProps) {
             FAQ
           </a>
 
-          <div className="pt-3 border-t border-[#dfe8e3] flex flex-col gap-2">
-            {isAuthenticated ? (
-              <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                <Button className="w-full bg-[#073b3a] hover:bg-[#0a504d] text-white gap-2 text-xs font-semibold">
-                  <span>Go to Workspace</span>
-                  <ArrowRight className="size-3.5" />
+          {!isAuthenticated && (
+            <div className="pt-3 border-t border-[#dfe8e3] flex flex-col gap-2">
+              <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                <Button variant="outline" className="w-full border-slate-300 text-slate-800">
+                  Log In
                 </Button>
               </Link>
-            ) : (
-              <>
-                <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                  <Button variant="outline" className="w-full border-slate-300 text-slate-800">
-                    Log In
-                  </Button>
-                </Link>
-                <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
-                  <Button className="w-full bg-[#073b3a] hover:bg-[#0a504d] text-white">
-                    Start Free Trial
-                  </Button>
-                </Link>
-              </>
-            )}
-          </div>
+              <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
+                <Button className="w-full bg-[#073b3a] hover:bg-[#0a504d] text-white">
+                  Start Free Trial
+                </Button>
+              </Link>
+            </div>
+          )}
         </nav>
       )}
     </header>
