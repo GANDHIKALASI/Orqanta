@@ -4,7 +4,8 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { AppShell } from "@/components/app-shell";
-import type { SubscriptionStatus } from "@/lib/types";
+import { AlertTriangle } from "lucide-react";
+import type { SubscriptionStatus, FailedPaymentInfo, OrganizationBillingData } from "@/lib/types";
 
 export default async function AppLayout({
   children,
@@ -27,7 +28,8 @@ export default async function AppLayout({
     .eq("id", user.id)
     .single();
 
-  const org = profile?.organization;
+  const rawOrg = profile?.organization;
+  const org = (Array.isArray(rawOrg) ? rawOrg[0] : rawOrg) as Record<string, any> | undefined;
   const orgName = org?.name;
   const userName = profile?.full_name;
   const userEmail = profile?.email || user.email;
@@ -83,6 +85,17 @@ export default async function AppLayout({
   const daysRemaining = Math.min(7, Math.max(0, Math.ceil(msRemaining / (1000 * 60 * 60 * 24))));
   const isDemoMode = Boolean((org?.feature_flags as Record<string, unknown>)?.demo_mode);
 
+  // Check for prominent failed payment alert
+  const orgFlags = (org?.feature_flags as Record<string, unknown>) || {};
+  const billingData = orgFlags.billing as OrganizationBillingData | undefined;
+  const failedPayment = billingData?.failed_payment as FailedPaymentInfo | undefined;
+  const isPaymentFailed = Boolean(failedPayment?.is_failed);
+
+  const graceDate = failedPayment?.grace_period_ends_at
+    ? new Date(failedPayment.grace_period_ends_at)
+    : new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
+  const graceDaysLeft = Math.max(0, Math.ceil((graceDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)));
+
   return (
     <AppShell
       userEmail={userEmail}
@@ -90,8 +103,28 @@ export default async function AppLayout({
       orgName={orgName}
       isDemoMode={isDemoMode}
     >
+      {/* Failed Payment Urgent Banner — Surfaces prominently across all pages */}
+      {isPaymentFailed && !isBillingPage && (
+        <div className="mb-6 p-3 px-4 rounded-xl border border-red-500/40 bg-red-500/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs shadow-sm">
+          <div className="flex items-center gap-2.5 text-red-950 font-medium">
+            <span className="p-1 rounded bg-red-600 text-white shrink-0">
+              <AlertTriangle className="size-3.5" />
+            </span>
+            <span>
+              <strong className="font-bold text-red-900">Payment Failed:</strong> A renewal payment of ₹{failedPayment?.amount || 1999} could not be processed. Update your payment method within {graceDaysLeft} days to avoid workspace suspension.
+            </span>
+          </div>
+          <Link
+            href="/billing"
+            className="text-xs font-bold px-3 py-1 rounded-lg bg-red-600 hover:bg-red-700 text-white transition-all shadow-xs shrink-0"
+          >
+            Resolve Payment
+          </Link>
+        </div>
+      )}
+
       {/* 7-Day Trial Top Indicator Banner — Sleek & Non-Intrusive */}
-      {subscriptionStatus === "trialing" && !isBillingPage && (
+      {!isPaymentFailed && subscriptionStatus === "trialing" && !isBillingPage && (
         <div className="mb-6 p-2.5 px-4 rounded-xl border border-amber-500/25 bg-amber-500/10 flex items-center justify-between text-xs backdrop-blur-sm shadow-xs">
           <div className="flex items-center gap-2.5 text-amber-900 font-medium">
             <span className="relative flex h-2 w-2 shrink-0">

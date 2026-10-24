@@ -30,7 +30,73 @@ export interface FeatureFlags {
   api_enabled: boolean;
 }
 
-export type SubscriptionStatus = "trialing" | "active" | "locked";
+export type SubscriptionStatus = "trialing" | "active" | "locked" | "past_due";
+
+export interface PaymentMethod {
+  id: string;
+  brand: "visa" | "mastercard" | "amex" | "discover" | "other";
+  last4: string;
+  exp_month: string;
+  exp_year: string;
+  cardholder_name: string;
+  is_default: boolean;
+  created_at?: string;
+}
+
+export interface BillingInvoice {
+  id: string;
+  invoice_number: string;
+  created_at: string;
+  due_date: string;
+  paid_at: string | null;
+  amount: number;
+  subtotal: number;
+  tax_rate: number; // e.g. 18 for 18%
+  tax_amount: number;
+  currency: string;
+  plan_name: string;
+  billing_period?: string;
+  status: "paid" | "failed" | "pending";
+  payment_method_last4?: string;
+  payment_method_brand?: string;
+  pdf_url?: string;
+}
+
+export interface BillingDetails {
+  company_name?: string;
+  contact_email?: string;
+  address_line1?: string;
+  address_line2?: string;
+  city?: string;
+  state?: string;
+  postal_code?: string;
+  country?: string;
+  vat_number?: string; // Tax ID / VAT / GSTIN
+}
+
+export interface FailedPaymentInfo {
+  is_failed: boolean;
+  failed_at: string;
+  amount: number;
+  plan_name: string;
+  reason: string;
+  retry_count: number;
+  grace_period_ends_at: string;
+}
+
+export interface OrganizationBillingData {
+  plan: "monthly" | "annual";
+  plan_name: string;
+  planName?: string;
+  amount: number;
+  currency: string;
+  next_billing_date: string;
+  auto_renew: boolean;
+  payment_methods: PaymentMethod[];
+  billing_details: BillingDetails;
+  failed_payment?: FailedPaymentInfo | null;
+  invoices: BillingInvoice[];
+}
 
 export interface Organization {
   id: string;
@@ -39,6 +105,7 @@ export interface Organization {
   feature_flags: FeatureFlags & {
     trial_ends_at?: string;
     subscription_status?: SubscriptionStatus;
+    billing?: Partial<OrganizationBillingData>;
   };
   api_key: string | null;
   trial_ends_at?: string;

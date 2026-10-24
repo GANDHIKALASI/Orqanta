@@ -6,6 +6,7 @@ import { LandingNavbar } from "./navbar";
 import { LandingHero } from "./hero";
 import { LandingFeatures } from "./features";
 import { LandingPricing } from "./pricing";
+import { LandingFaq } from "./faq";
 import { LandingFooter } from "./footer";
 
 interface LandingPageProps {
@@ -40,6 +41,9 @@ export function LandingPage({ isAuthenticated, userEmail }: LandingPageProps) {
 
       {/* Transparent Pricing (₹199/mo & ₹1999/yr) */}
       <LandingPricing isAuthenticated={isAuthenticated} />
+
+      {/* Frequently Asked Questions (FAQ) */}
+      <LandingFaq />
 
       {/* Architectural Multi-Column Footer */}
       <LandingFooter />

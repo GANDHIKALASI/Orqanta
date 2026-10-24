@@ -58,6 +58,12 @@ export function LandingNavbar({ isAuthenticated }: NavbarProps) {
           >
             Pricing
           </a>
+          <a
+            href="#faq"
+            className="hover:text-[#073b3a] transition-colors"
+          >
+            FAQ
+          </a>
         </nav>
 
         {/* Desktop Action Buttons */}
@@ -114,6 +120,13 @@ export function LandingNavbar({ isAuthenticated }: NavbarProps) {
             className="py-1.5 text-emerald-800 font-semibold"
           >
             Pricing
+          </a>
+          <a
+            href="#faq"
+            onClick={() => setMobileMenuOpen(false)}
+            className="py-1.5 hover:text-[#073b3a]"
+          >
+            FAQ
           </a>
 
           {!isAuthenticated && (

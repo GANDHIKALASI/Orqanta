@@ -30,6 +30,31 @@ const faqs: FaqItem[] = [
       "Orqanta's compliance guard continuously tracks contractor insurance expiry dates. If a contractor's insurance has expired, they are visually flagged with an alert badge, and the AI dispatcher will prioritize active, compliant vendors first.",
   },
   {
+    question: "What payment methods are supported?",
+    answer:
+      "We process payments securely via the official Razorpay gateway. You can pay using all major Credit and Debit Cards (Visa, Mastercard, RuPay, Amex), UPI (Google Pay, PhonePe, Paytm, BHIM), Netbanking across 50+ banks, and corporate cards. All transactions are 256-bit encrypted and RBI-compliant.",
+  },
+  {
+    question: "How does the 7-day free trial work?",
+    answer:
+      "You receive full, unrestricted access to all Orqanta features for 7 days upon signup—no credit card required upfront. If you choose not to subscribe, your workspace locks safely without losing any work orders or building records until you select either the Monthly (₹199/mo) or Annual (₹1,999/yr) plan.",
+  },
+  {
+    question: "Do you issue official VAT / Tax invoices with company details?",
+    answer:
+      "Yes. Every charge automatically generates a legally compliant tax invoice including your Company Legal Name, Registered Address, and VAT / Tax / GSTIN number. Invoices itemize the 18% tax breakdown and can be downloaded as PDF receipts anytime from your Billing portal.",
+  },
+  {
+    question: "Can I cancel or switch my plan anytime?",
+    answer:
+      "Yes! You can switch between Monthly and Annual billing or cancel auto-renewal with one click directly from your Billing dashboard. Your access will remain active through the end of your paid billing period.",
+  },
+  {
+    question: "Are there any hidden per-door or per-ticket fees?",
+    answer:
+      "No. Both the Monthly and Annual plans include unlimited properties, unlimited doors/units, and unlimited tenant maintenance ticket submissions with zero per-door surcharges.",
+  },
+  {
     question: "How long does onboarding take?",
     answer:
       "Less than 5 minutes. As soon as you sign up, an interactive 3-step onboarding checklist guides you through adding your first property, registering a primary vendor, and creating or receiving your first work order.",
